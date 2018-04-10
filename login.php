@@ -1,3 +1,12 @@
+<?php
+	session_start();
+
+	if(isset($_SESSION['account_created']) && !empty($_SESSION['account_created'])) {
+		echo "SET";
+		session_destroy();
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +18,7 @@
 	<title>Login</title>
 </head>
 <body>
-	<div class="container-center">
+	<div class="container">
 		<div class="error">
 
 		</div>
@@ -17,25 +26,39 @@
 			<div>
 				<label for="username-id" class="text-paragraph">Username:</label>
 				<div>
-					<input type="text" id="username-id" name="username">
+					<input type="text" id="username-id" name="username" placeholder="Username">
 				</div>
 			</div> 
 
 			<div>
 				<label for="password-id" class="text-paragraph">Password:</label>
 				<div class="col-sm-9">
-					<input type="password" id="password-id" name="password">
+					<input type="password" id="password-id" name="password" placeholder="Password">
 				</div>
 			</div> 
 
 			<div>
-				<div>
-					<button type="submit">Login</button>
-				</div>
+				<button type="submit">Login</button>
 			</div> 
 		</form>
 
-		<p class="text-paragraph">Don't have an account? <a href="register.html">Sign Up</a></p>
+		<p class="text-paragraph">Don't have a host account? <a href="register.php">Sign Up</a></p>
 	</div>
+
+	<script type="text/javascript">
+		document.querySelector("form").onsubmit = function() {
+			var validLogin = true;
+			var username = document.querySelector("#username-id").value;
+			var password = document.querySelector("#password-id").value;
+
+			if(username.trim().length == 0) {
+				validLogin = false;
+			}
+			if(password.trim().length == 0) {
+				validLogin = false;
+			}
+
+			return validLogin;
+	</script>
 </body>
 </html>
