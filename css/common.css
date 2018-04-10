@@ -1,0 +1,17 @@
+body {
+	background-color: black;
+	font-family: 'Questrial', sans-serif;
+}
+
+.text-header {
+	color: white;
+}
+
+.text-paragraph {
+	color: white;
+}
+
+.container-center {
+	margin: auto;
+	width: 50%;
+}
