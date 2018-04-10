@@ -8,6 +8,10 @@
 	<title>Home</title>
 </head>
 <body>
+	<?php include 'nav.php'; ?>
+
+	<div class="clear"></div>
+	
 	<div class="login">
 		<a href="login.php">Login</a>
 	</div>

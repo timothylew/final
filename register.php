@@ -1,10 +1,13 @@
 <?php
 	session_start(); 
 
-	if(isset($_POST['password']) && !empty($_POST['password'])){
+	if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['username']) && !empty($_POST['username'])){
 		$_SESSION['account_created'] = "set";
 		$password_hash = hash('sha256', $_POST['password']);
 		header("Location: login.php");
+	}
+	else if(isset($_SESSION['registration_submit']) && !empty($_SESSION['registration_submit'])) {
+		$error = "There was an error processing your registration.  Please try again or contact an administrator.";
 	}
 ?>
 
@@ -18,11 +21,19 @@
 	<title>Register</title>
 </head>
 <body>
+	<div class="error"></div>
 	<div class="container">
 		<h1>Want to facilitate better communication between your event-goers and live musicians?</h1>
 		<p>A host account on _______ will let you do that!  Right now, this service is free for you to use, within our Terms of Service.</p>
 	</div>
 	<div class="container">
+
+		<!-- <?php if(isset($error) && !empty($error)) : ?>
+			<div class="error">
+				<?php echo $error; ?>
+			</div>
+		<?php endif; ?> -->
+
 		<form action="register.php" method="POST">
 			<div>
 				<label for="username-id" class="text-paragraph">Username:</label>
@@ -53,24 +64,50 @@
 	<script type="text/javascript">
 		document.querySelector("form").onsubmit = function() {
 			var validRegistration = true;
-			var username = document.querySelector("#username-id").value;
-			var password = document.querySelector("#password-id").value;
-			var passwordConfirm = document.querySelector("#password-confirm").value;
+			var username = document.querySelector("#username-id");
+			var password = document.querySelector("#password-id");
+			var passwordConfirm = document.querySelector("#password-confirm");
 
-			if(password != passwordConfirm) {
+			if(password.value != passwordConfirm.value) {
 				validRegistration = false;
+				createAlert("Your passwords do not match.");
 			}
-			if(username.trim().length == 0) {
+			if(username.value.trim().length == 0) {
 				validRegistration = false;
+				username.value = "";
+				createAlert("Username must not be empty.");
+				// Switch class here.
 			}
-			if(password.trim().length == 0) {
+			if(password.value.trim().length == 0) {
 				validRegistration = false;
+				createAlert("Password must not be empty.");
 			}
-			if(passwordConfirm.trim().length == 0) {
+			if(passwordConfirm.value.trim().length == 0) {
 				validRegistration = false;
+				createAlert("Confirm password must not be empty.")
 			}
 
 			return validRegistration;
+		}
+
+		function createAlert(message) {
+			var alertDiv = document.createElement("div");
+			alertDiv.innerText = message;
+
+			var alertSpan = document.createElement("span");
+			alertSpan.innerHTML = "&times;";
+			alertSpan.classList.add("closebtn");
+
+			alertSpan.onclick = function() {
+				alertDiv.classList.add("close-alert");
+			}
+
+			alertDiv.style.setProperty("top", (document.querySelector(".error").childElementCount * 70) + "px");
+			console.log(alertDiv.style.top);
+			alertDiv.appendChild(alertSpan);
+			alertDiv.classList.add("alert");
+
+			document.querySelector(".error").appendChild(alertDiv);
 		}
 
 	</script>
