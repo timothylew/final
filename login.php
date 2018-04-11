@@ -1,12 +1,3 @@
-<?php
-	session_start();
-
-	if(isset($_SESSION['account_created']) && !empty($_SESSION['account_created'])) {
-		echo "SET";
-		session_destroy();
-	}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +8,10 @@
 	<title>Login</title>
 </head>
 <body>
+	<?php include 'nav.php'; ?>
+	<div class="error"></div>
 	<div class="container">
-		<div class="error">
-
-		</div>
+		<h1>Welcome back.</h1>
 		<form action="login.php" method="POST">
 			<div>
 				<label for="username-id" class="text-paragraph">Username:</label>
@@ -58,6 +49,18 @@
 			}
 
 			return validLogin;
+		}
 	</script>
 </body>
 </html>
+
+<!--  The conditional scripts must load AFTER HTML resolves. -->
+<?php
+	session_start();
+
+	if(isset($_SESSION['account_created']) && !empty($_SESSION['account_created'])) {
+		echo '<script type="text/javascript" src="alert.js"></script>';
+		echo '<script type="text/javascript">createAlert("Account successfully created.", "green");</script>';
+		session_destroy();
+	}
+?>

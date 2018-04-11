@@ -4,6 +4,21 @@
 	if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['username']) && !empty($_POST['username'])){
 		$_SESSION['account_created'] = "set";
 		$password_hash = hash('sha256', $_POST['password']);
+
+		// $email = $_POST['email'];
+		// $subject = "Welcome to lucidity.";
+		// $msg = "Thank you for making your lucidity account.";
+		// $headers = "From: noreply@timothylew.com"
+		// 		  . "\r\n"
+		// 		  . "Content-Type: text/html";
+
+		// if(mail($email, $subject, $msg, $headers)) {
+		// 	echo '<script>console.log("Confirmation email sent.");</script>';
+		// }
+		// else {
+		// 	echo '<script>console.log("Confirmation email failed to send.");</script>';
+		// }
+
 		header("Location: login.php");
 	}
 	else if(isset($_SESSION['registration_submit']) && !empty($_SESSION['registration_submit'])) {
@@ -21,10 +36,12 @@
 	<title>Register</title>
 </head>
 <body>
+	<?php include 'nav.php'; ?>
+
 	<div class="error"></div>
 	<div class="container">
 		<h1>Want to facilitate better communication between your event-goers and live musicians?</h1>
-		<p>A host account on _______ will let you do that!  Right now, this service is free for you to use, within our Terms of Service.</p>
+		<p>Your free Lucidity host account will allow you to: </p>
 	</div>
 	<div class="container">
 
@@ -39,6 +56,13 @@
 				<label for="username-id" class="text-paragraph">Username:</label>
 				<div>
 					<input type="text" id="username-id" name="username" placeholder="Username">
+				</div>
+			</div> 
+
+			<div>
+				<label for="email-id" class="text-paragraph">Email:</label>
+				<div>
+					<input type="email" id="email-id" name="email" placeholder="Email">
 				</div>
 			</div> 
 
@@ -61,8 +85,18 @@
 		</form>
 	</div>
 
+	<script type="text/javascript" src="alert.js"></script>
+
 	<script type="text/javascript">
 		document.querySelector("form").onsubmit = function() {
+
+			// Remove existing error notifications.
+			var errorDiv = document.querySelector(".error");
+			while(errorDiv.hasChildNodes()) { 
+				errorDiv.removeChild(errorDiv.firstChild);
+			}
+
+			var red = "#f44336";
 			var validRegistration = true;
 			var username = document.querySelector("#username-id");
 			var password = document.querySelector("#password-id");
@@ -70,44 +104,24 @@
 
 			if(password.value != passwordConfirm.value) {
 				validRegistration = false;
-				createAlert("Your passwords do not match.");
+				createAlert("Your passwords do not match.", red);
 			}
 			if(username.value.trim().length == 0) {
 				validRegistration = false;
 				username.value = "";
-				createAlert("Username must not be empty.");
+				createAlert("Username must not be empty.", red);
 				// Switch class here.
 			}
 			if(password.value.trim().length == 0) {
 				validRegistration = false;
-				createAlert("Password must not be empty.");
+				createAlert("Password must not be empty.", red);
 			}
 			if(passwordConfirm.value.trim().length == 0) {
 				validRegistration = false;
-				createAlert("Confirm password must not be empty.")
+				createAlert("Confirm password must not be empty.", red)
 			}
 
 			return validRegistration;
-		}
-
-		function createAlert(message) {
-			var alertDiv = document.createElement("div");
-			alertDiv.innerText = message;
-
-			var alertSpan = document.createElement("span");
-			alertSpan.innerHTML = "&times;";
-			alertSpan.classList.add("closebtn");
-
-			alertSpan.onclick = function() {
-				alertDiv.classList.add("close-alert");
-			}
-
-			alertDiv.style.setProperty("top", (document.querySelector(".error").childElementCount * 70) + "px");
-			console.log(alertDiv.style.top);
-			alertDiv.appendChild(alertSpan);
-			alertDiv.classList.add("alert");
-
-			document.querySelector(".error").appendChild(alertDiv);
 		}
 
 	</script>
