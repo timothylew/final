@@ -59,7 +59,7 @@
 	session_start();
 
 	if(isset($_SESSION['account_created']) && !empty($_SESSION['account_created'])) {
-		echo '<script type="text/javascript" src="alert.js"></script>';
+		echo '<script type="text/javascript" src="util.js"></script>';
 		echo '<script type="text/javascript">createAlert("Account successfully created.", "green");</script>';
 		session_destroy();
 	}

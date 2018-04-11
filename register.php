@@ -85,7 +85,7 @@
 		</form>
 	</div>
 
-	<script type="text/javascript" src="alert.js"></script>
+	<script type="text/javascript" src="util.js"></script>
 
 	<script type="text/javascript">
 		document.querySelector("form").onsubmit = function() {
