@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +13,21 @@
 </head>
 <body>
 	<?php include 'nav.php'; ?>
+	<div class="error"></div>
 
 	<div class="container">
-		<!-- form goes here -->
+		<h1>Welcome to the new standard for music communication at events.</h1>
+		
 
 	</div>
 </body>
 </html>
+
+<!--  The conditional scripts must load AFTER HTML resolves. -->
+<?php
+	if(isset($_SESSION['logout']) && !empty($_SESSION['logout'])) {
+		echo '<script type="text/javascript" src="util.js"></script>';
+		echo '<script type="text/javascript">createAlert("You have successfully logged out.", "green");</script>';
+		session_destroy();
+	}
+?>
