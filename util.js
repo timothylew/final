@@ -37,6 +37,10 @@ function refreshToken() {
 	request.onreadystatechange = function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
+				if(request.responseText == "response_error") {
+					createAlert("Spotify token validation error - An administrator has been notified", "red");
+				}
+				// Otherwise, request resolved properly.
 				console.log(request.responseText);
 			}
 			else {

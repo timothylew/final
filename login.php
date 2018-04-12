@@ -1,3 +1,12 @@
+<?php 
+	session_start();
+
+	if(isset($_SESSION['current_user']) && !empty($_SESSION['current_user'])) {
+		header("Location: dashboard.php");
+	}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +21,7 @@
 	<div class="error"></div>
 	<div class="container">
 		<h1>Welcome back.</h1>
-		<form action="login.php" method="POST">
+		<form action="dashboard.php" method="POST">
 			<div>
 				<label for="username-id" class="text-paragraph">Username:</label>
 				<div>
@@ -35,18 +44,28 @@
 		<p class="text-paragraph">Don't have a host account? <a href="register.php">Sign Up</a></p>
 	</div>
 
+	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript">
 		document.querySelector("form").onsubmit = function() {
+			var errorDiv = document.querySelector(".error");
+			while(errorDiv.hasChildNodes()) { 
+				errorDiv.removeChild(errorDiv.firstChild);
+			}
+			
 			var validLogin = true;
 			var username = document.querySelector("#username-id").value;
 			var password = document.querySelector("#password-id").value;
 
 			if(username.trim().length == 0) {
 				validLogin = false;
+				createAlert("Username must not be empty.", "red");
 			}
 			if(password.trim().length == 0) {
 				validLogin = false;
+				createAlert("Password must not be empty.", "red");
 			}
+
+			// TODO verify login
 
 			return validLogin;
 		}
@@ -56,8 +75,6 @@
 
 <!--  The conditional scripts must load AFTER HTML resolves. -->
 <?php
-	session_start();
-
 	if(isset($_SESSION['account_created']) && !empty($_SESSION['account_created'])) {
 		echo '<script type="text/javascript" src="util.js"></script>';
 		echo '<script type="text/javascript">createAlert("Account successfully created.", "green");</script>';
