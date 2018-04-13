@@ -11,7 +11,7 @@ function createAlert(message, color) {
 		alertDiv.classList.add("close-alert");
 	}
 
-	alertDiv.style.setProperty("top", (document.querySelector(".error").childElementCount * 70) + "px");
+	alertDiv.style.setProperty("top", 80 + (document.querySelector(".error").childElementCount * 70) + "px");
 	alertDiv.style.setProperty("background-color", color);
 	console.log(alertDiv.style.top);
 	alertDiv.appendChild(alertSpan);
@@ -32,6 +32,7 @@ function createAlert(message, color) {
 	3 = LOADING
 	4 = DONE
 */
+
 function refreshToken() {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {

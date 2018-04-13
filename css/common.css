@@ -90,6 +90,7 @@ button:hover {
     position: absolute;
     opacity: 0.9;
     width: 300px;
+    right: 0px;
 }
 
 .close-alert {

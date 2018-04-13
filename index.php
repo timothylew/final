@@ -17,7 +17,9 @@
 
 	<div class="container">
 		<h1>Welcome to the new standard for music communication at events.</h1>
-		
+		<!-- <video autoplay muted loop id="video-home">
+  			<source src="img/lucidity.mov" type="video/mov">
+		</video> -->
 
 	</div>
 </body>
