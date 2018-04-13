@@ -8,6 +8,7 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/event.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Request Song</title>
@@ -16,15 +17,19 @@
 	<?php include 'nav.php'; ?>
 	<div class="error"></div>
 	<div class="container" style="width:70%;"> 
+		<h1 style="text-align: center;"> Request a Song </h1>
 		<form action="event.php" method="POST">
-				<div>
+				<div class="event-input">
 					<label for="event-code" class="text-paragraph">Event Code:</label>
-					<div style="float:left;">
+					<div>
 						<input type="text" id="event-code" name="event-code" placeholder="Event Code" 
-						style="height:60px; width:180px; text-align:center;">
+						style="height:50px; width:180px; text-align:center;">
 					</div>
 					<div>
-						<p id="code-instruction">To request a song, you must have a 5 character event code. Your event planner will distribute this code.</p>
+						<p id="code-instruction">
+							You may obtain an event code from your event planner. <br> <br>
+							You must enter this code in the field above.
+						</p>
 					</div>
 				</div> 
 		</form>
@@ -45,12 +50,12 @@
 		}
 
 		function processEventCode(code) {
-			eventCode.style.setProperty("background-color", "black");
-			eventCode.style.setProperty("color", "white");
+			eventCode.classList.add("code-submitted");
 			var searchDiv = document.createElement("div");
 			var searchField = document.createElement("input");
 			var searchButton = document.createElement("button");
 			searchField.id = "search-field";
+			searchField.placeholder = "Search for a song...";
 			searchButton.id = "search-button";
 			searchField.type = "text";
 			searchDiv.appendChild(searchField);
@@ -85,13 +90,32 @@
 			artistName.innerHTML = artist;
 			albumName.innerHTML = album;
 			image.src = imageURL;
+			image.style.setProperty("width", "100px");
 			request.innerHTML = "Request";
 
-			container.appendChild(songName);
-			container.appendChild(artistName);
-			container.appendChild(albumName);
-			container.appendChild(image);
+			var songInformation = document.createElement("div");
+			songInformation.appendChild(songName);
+			songInformation.appendChild(artistName);
+			songInformation.appendChild(albumName);
+			songInformation.classList.add("list-item");
+
+			image.style.float = "left";
+			image.classList.add("list-item");
+
+			request.style.float = "left";
+			request.classList.add("request");
+			request.classList.add("list-item");
+
+			request.onclick = function() {
+				this.innerHTML = "Requested";
+				this.classList.add("requested");
+			}
+
 			container.appendChild(request);
+			container.appendChild(image);
+			container.appendChild(songInformation);
+
+			container.classList.add("list-object");
 
 			document.querySelector("#search-results").appendChild(container);
 		}

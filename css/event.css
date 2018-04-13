@@ -1,0 +1,36 @@
+.request {
+	width: 100px;
+}
+
+.list-item {
+	top: 50%;
+	bottom: 50%;
+	margin: 0px 15px;
+}
+
+.list-object {
+	height: 100px;
+	margin: 15px 0px;
+	border-left: 1px solid green;
+	padding: 10px 0px;
+}
+
+.event-input {
+	height: 100px;
+	margin: 40px 0px;
+	text-align: center
+}
+
+.requested {
+	transition: background 0.5s ease-in-out;
+	background-color: black;
+	border-color: green;
+	color: white;
+}
+
+.code-submitted {
+	transition: background 0.5s ease-in-out;
+	background-color: black;
+	border-color: white;
+	color: white;
+}
