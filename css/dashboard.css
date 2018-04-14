@@ -29,11 +29,18 @@
 }
 
 .dashboard_left {
-
+	/*border: 1px solid green;*/
+	float: left;
+	width: 49%;
+	text-align: center;
+	background-color: green;
 }
 
 .dashboard_right {
-
+	text-align: center;
+	float:right;
+	width: 49%;
+	background-color: red;
 }
 
 #event-id {
@@ -41,7 +48,7 @@
 	text-align: center
 }
 
-.select-event {
+.select-option {
 	width: 180px;
 	text-align: center
 	height: 80px;
@@ -54,4 +61,8 @@
 	padding: 0px 10px;
 	margin: 20px 0px;
 	transition: background 0.5s ease-in-out;
+}
+
+button {
+	width: 180px;
 }
