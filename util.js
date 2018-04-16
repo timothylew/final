@@ -49,6 +49,25 @@ function refreshToken() {
 			}
 		}
 	};
-	request.open("POST", "api/token.php");
+	request.open("POST", "api/token.php"); // this might need to be a GET.
+	request.send();
+}
+
+
+// TODO this needs to be tested and verified as working properly
+function lookupTrack(query) {
+	var spotifyQuery = "?" + query.replace(" ", "+");
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(request.responseText);
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	}
+	request.open("GET", "api/search.php" + spotifyQuery);
 	request.send();
 }
