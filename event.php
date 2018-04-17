@@ -87,7 +87,14 @@
 			console.log(results);
 			var resultsArray = results.tracks.items;
 			for(var i = 0; i < resultsArray.length; i++) {
-				createEventElement(resultsArray[i].name, "Artist", resultsArray[i].album.name, resultsArray[i].album.images[0].url);
+				var artistString = "";
+				for(var j = 0; j < resultsArray[i].album.artists.length; j++) {
+					artistString += resultsArray[i].album.artists[j].name;
+					if(j != resultsArray[i].album.artists.length - 1) {
+						artistString += ", ";
+					}
+				}
+				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url);
 				//console.log(resultsArray[i].name);
 			}
 
