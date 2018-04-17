@@ -86,6 +86,11 @@
 		function loadEventResultsCallback(results) {
 			console.log(results);
 			var resultsArray = results.tracks.items;
+			if(resultsArray.length <= 0) {
+				var noResults = document.createElement("p");
+				noResults.innerHTML = "No results found";
+				document.querySelector("#search-results").appendChild(noResults);
+			}
 			for(var i = 0; i < resultsArray.length; i++) {
 				var artistString = "";
 				for(var j = 0; j < resultsArray[i].album.artists.length; j++) {

@@ -53,8 +53,6 @@ function refreshToken() {
 	request.send();
 }
 
-
-// TODO this needs to be tested and verified as working properly
 function lookupTrack(query, callback) {
 	var spotifyQuery = "?q=" + query.replace(" ", "+");
 	console.log(spotifyQuery);
@@ -71,5 +69,22 @@ function lookupTrack(query, callback) {
 		}
 	});
 	request.open("GET", "api/search.php" + spotifyQuery);
+	request.send();
+}
+
+function retrieveSeveralTracks(idList, callback) {
+	var spotifyQuery = "?ids=" + idList;
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(request.responseText);
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/retrieveSeveralTracks.php" + spotifyQuery);
 	request.send();
 }

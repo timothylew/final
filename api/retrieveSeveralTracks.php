@@ -2,8 +2,10 @@
 
 /* * * * * 
 
-	/api/search.php
-	Retrieves a list of tracks by querying the Spotify Web API using the search parameters given.
+	/api/retrieveSeveralTracks.php
+	Retrieves several tracks by querying the Spotify Web API using a list of Spotify song IDs.
+	You MUST know the song IDs beforehand - this is NOT a normal search query.
+	Maximum: 50IDs at a time.
 
 	
 * * * * */
@@ -13,12 +15,10 @@
 
 	$curl = curl_init();
 
-	$query = str_replace(" ", "+", $_GET['q']);
-
 	$header = array('Authorization: Bearer ' . $_SESSION['token']);
 
 	curl_setopt_array($curl, array(
-		CURLOPT_URL 			=> 	'https://api.spotify.com/v1/search?q=' . $query . '&type=track',
+		CURLOPT_URL 			=> 	'https://api.spotify.com/v1/tracks/?ids=' . $_GET['ids'],
 		CURLOPT_HTTPHEADER 		=> 	$header,
 		//CURLOPT_SSL_VERIFYPEER 	=> 	false, // why?
 		CURLOPT_RETURNTRANSFER 	=> 	true,
@@ -31,7 +31,7 @@
 	if(isset($response_array['error']) && !empty($response_array['error'])) {
 		echo "response_error";
 		$email_header = "From: " . DEBUG_FROM . "\r\n" . "Content-Type: text/html";
-		mail(DEBUG_TO, "[Lucidity] Search API Error: " . date("Y-m-d h:i:sa"), $response, $email_header);
+		mail(DEBUG_TO, "[Lucidity] RetrieveSeveral API Error: " . date("Y-m-d h:i:sa"), $response, $email_header);
 	}
 	else {
 		echo $response;
