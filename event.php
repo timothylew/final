@@ -65,6 +65,8 @@
 			searchButton.onclick = function() {
 				loadEventResults(searchField.value);
 			}
+
+			refreshToken(); //TODO
 		}
 
 		function loadEventResults(query) {
@@ -73,9 +75,22 @@
 				createAlert("Search field cannot be empty.", "red");
 			}
 			else {
+				//refreshToken(); // Do this?
+				var results = lookupTrack(query, loadEventResultsCallback);
+				//console.log("RESULTS:" + results);
 				// Make search request here.
-				createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718");
+				//createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718");
 			}
+		}
+
+		function loadEventResultsCallback(results) {
+			console.log(results);
+			var resultsArray = results.tracks.items;
+			for(var i = 0; i < resultsArray.length; i++) {
+				createEventElement(resultsArray[i].name, "Artist", resultsArray[i].album.name, resultsArray[i].album.images[0].url);
+				//console.log(resultsArray[i].name);
+			}
+
 		}
 
 		function createEventElement(song, artist, album, imageURL) {

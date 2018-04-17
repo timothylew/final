@@ -35,7 +35,7 @@ function createAlert(message, color) {
 
 function refreshToken() {
 	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
+	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				if(request.responseText == "response_error") {
@@ -48,26 +48,28 @@ function refreshToken() {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
 			}
 		}
-	};
+	});
 	request.open("POST", "api/token.php"); // this might need to be a GET.
 	request.send();
 }
 
 
 // TODO this needs to be tested and verified as working properly
-function lookupTrack(query) {
-	var spotifyQuery = "?" + query.replace(" ", "+");
+function lookupTrack(query, callback) {
+	var spotifyQuery = "?q=" + query.replace(" ", "+");
+	console.log(spotifyQuery);
 	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
+	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				console.log(request.responseText);
+				//console.log(request.responseText);
+				callback(JSON.parse(request.responseText));
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
 			}
 		}
-	}
+	});
 	request.open("GET", "api/search.php" + spotifyQuery);
 	request.send();
 }

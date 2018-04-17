@@ -12,28 +12,33 @@
 
 	$curl = curl_init();
 
+	$query = str_replace(" ", "+", $_GET['q']);
+
 	$header = array('Authorization: Bearer ' . $_SESSION['token']);
 
-	$request_parameters = array(
-		'q' => 'test',//$_POST['search_query'],
-		'type' => 'track,artist,album'
-	);
+	// $request_parameters = array(
+		
+	// );
 
 	curl_setopt_array($curl, array(
-		CURLOPT_URL 			=> 	'',
+		CURLOPT_URL 			=> 	'https://api.spotify.com/v1/search?q=' . $query . '&type=track',
 		CURLOPT_HTTPHEADER 		=> 	$header,
 		//CURLOPT_SSL_VERIFYPEER 	=> 	false, // why?
 		CURLOPT_RETURNTRANSFER 	=> 	true,
-		CURLOPT_POST 			=> 	true,
-		CURLOPT_POSTFIELDS		=> 	http_build_query($request_parameters)
+		CURLOPT_POST 			=> 	false,
+		//CURLOPT_POSTFIELDS		=> 	http_build_query($request_parameters)
 	));
 
 	//var_dump(curl_exec($curl));
-	echo(curl_exec($curl));
-
-	//echo 'curl -X "POST" -H "Authorization: Basic '. base64_encode("b140bc470331497c8186640fe20f714f:3ae8624282af461cae06c369ddc9226d").'" -d grant_type=client_credentials https://accounts.spotify.com/api/token';
-
-	//curl -X GET "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist" -H "Authorization: Bearer {your access token}"
-
-
+	$response = curl_exec($curl);
+	$response_array = json_decode($response, true);
+	
+	if(isset($response_array['error']) && !empty($response_array['error'])) {
+		echo "response_error";
+		$email_header = "From: " . DEBUG_FROM . "\r\n" . "Content-Type: text/html";
+		mail(DEBUG_TO, "[Lucidity] Search API Error: " . date("Y-m-d h:i:sa"), $response, $email_header);
+	}
+	else {
+		echo $response;
+	}
 ?>
