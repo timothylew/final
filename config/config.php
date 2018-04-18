@@ -4,7 +4,7 @@
 	define('DB_HOST', '303.itpwebdev.com');
 	define('DB_USER', 'lewt_db_user');
 	define('DB_PASS', 'UscItp303');
-	define('DB_NAME', '');
+	define('DB_NAME', 'lewt_lucidity');
 
 	// The send to and send from emails for internal error reporting.  DO NOT CHANGE the first value.
 	define('DEBUG_TO', 'bugreports@timothylew.com');

@@ -1,0 +1,11 @@
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 100%;
+}
+
+button {
+	width: 40%;
+}
+
+.container {
+	width: 500px;
+}

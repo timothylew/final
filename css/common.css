@@ -9,17 +9,16 @@ a {
 	color:inherit;
 }
 
+.container {
+	margin: auto;
+}
+
 .text-header {
 	color: white;
 }
 
 .text-paragraph {
 	color: white;
-}
-
-.container {
-	margin: auto;
-	width: 500px;
 }
 
 .nav-element {
@@ -39,14 +38,6 @@ a {
 
 .clear {
 	clear: both;
-}
-
-button {
-	width: 40%;
-}
-
-input[type="text"], input[type="password"], input[type="email"] {
-	width: 100%;
 }
 
 input[type="text"], input[type="password"], input[type="email"], button {

@@ -16,18 +16,17 @@
 <body>
 	<?php include 'nav.php'; ?>
 	<div class="error"></div>
-	<div class="container" style="width:70%;"> 
-		<h1 style="text-align: center;"> Request a Song </h1>
+	<div class="container"> 
+		<h1> Request a Song </h1>
 		<form action="event.php" method="POST">
 				<div class="event-input">
 					<label for="event-code" class="text-paragraph">Event Code:</label>
 					<div>
-						<input type="text" id="event-code" name="event-code" placeholder="Event Code" 
-						style="height:50px; width:180px; text-align:center;">
+						<input type="text" id="event-code" name="event-code" placeholder="Event Code">
 					</div>
 					<div>
 						<p id="code-instruction">
-							You may obtain an event code from your event planner. <br> <br>
+							You may obtain a 5-character event code from your event planner. <br> <br>
 							You must enter this code in the field above.
 						</p>
 					</div>
@@ -70,6 +69,11 @@
 		}
 
 		function loadEventResults(query) {
+			var resultsDiv = document.querySelector("#search-results");
+			while(resultsDiv.hasChildNodes()) {
+				resultsDiv.removeChild(resultsDiv.firstChild);
+			}
+
 			console.log(query);
 			if(query.trim().length == 0) {
 				createAlert("Search field cannot be empty.", "red");
@@ -77,9 +81,6 @@
 			else {
 				//refreshToken(); // Do this?
 				var results = lookupTrack(query, loadEventResultsCallback);
-				//console.log("RESULTS:" + results);
-				// Make search request here.
-				//createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718");
 			}
 		}
 
@@ -100,7 +101,6 @@
 					}
 				}
 				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url);
-				//console.log(resultsArray[i].name);
 			}
 
 		}
