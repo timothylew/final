@@ -26,9 +26,16 @@
 	</div>
 
 	<div id="info">
-		<h2>Lucidity is the new, frustration-free way for eventgoers to request music.</h2>
-		<p>If you're an eventgoer, say goodbye to your trips to the DJ booth. With Lucidity, you can request the songs you want without leaving your friends. At events powered by Lucidity, your event organizers will distribute a really short code. All you have to do to have your voice be heard is go to our <a href=event.php>request page</a>, enter your code, and search for the songs you want to hear. Your songs will be sent directly to the DJ's dashboard, who will then evaluate the request.  It's that easy.</p>
-		<p></p>
+		<h2>Streamlined communication with Lucidity.</h2>
+		<div class="info-left">
+			<h2>For eventgoers...</h2>
+			<p>If you're an eventgoer, say goodbye to your trips to the DJ booth. With Lucidity, you can request the songs you want without leaving your friends. At events powered by Lucidity, your event organizers will distribute a really short code. All you have to do to have your voice be heard is go to our <a href=event.php>request page</a>, enter your code, and search for the songs you want to hear. Your songs will be sent directly to the DJ's dashboard, who will then evaluate the request.  It's that easy.</p>
+		</div>
+		<div class="info-right">
+			<h2>For event hosters...</h2>
+			<p></p>
+		</div>
+		<div class="clear"></div>
 	</div>
 </body>
 </html>

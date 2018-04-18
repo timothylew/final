@@ -6,7 +6,18 @@
 	padding: 0px 30px;
 }
 
-
 #info {
-	background-color: green;
+	background-color: white;
+	color: black;
+	display: inline-block;
+}
+
+.info-left{
+	float: left;
+	width: 50%;
+}
+
+.info-right {
+	float: right;
+	width: 50%;
 }
