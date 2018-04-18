@@ -1,0 +1,12 @@
+.container {
+	background: url("../img/home.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 600px;
+	padding: 0px 30px;
+}
+
+
+#info {
+	background-color: green;
+}

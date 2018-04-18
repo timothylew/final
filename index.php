@@ -7,6 +7,7 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
 	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/home.css"
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
@@ -20,7 +21,14 @@
 		<!-- <video autoplay muted loop id="video-home">
   			<source src="img/lucidity.mov" type="video/mov">
 		</video> -->
+		<a href="#info">Learn More</a>
 
+	</div>
+
+	<div id="info">
+		<h2>Lucidity is the new, frustration-free way for eventgoers to request music.</h2>
+		<p>If you're an eventgoer, say goodbye to your trips to the DJ booth. With Lucidity, you can request the songs you want without leaving your friends. At events powered by Lucidity, your event organizers will distribute a really short code. All you have to do to have your voice be heard is go to our <a href=event.php>request page</a>, enter your code, and search for the songs you want to hear. Your songs will be sent directly to the DJ's dashboard, who will then evaluate the request.  It's that easy.</p>
+		<p></p>
 	</div>
 </body>
 </html>
