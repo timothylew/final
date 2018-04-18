@@ -119,7 +119,7 @@
 		function createEventElement(song, artist, album, imageURL) {
 			// for each result, we must call this function
 			var container = document.createElement("div");
-			var songName = document.createElement("h3");
+			var songName = document.createElement("p");
 			var artistName = document.createElement("p");
 			var albumName = document.createElement("p");
 			var image = document.createElement("img");
