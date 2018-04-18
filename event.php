@@ -33,6 +33,7 @@
 				</div> 
 		</form>
 		<div id="search-area"></div>
+		<div class="clear"></div>
 		<div id="search-results"></div>
 	</div>
 
@@ -64,7 +65,11 @@
 			searchButton.onclick = function() {
 				loadEventResults(searchField.value);
 			}
-
+			searchField.onkeydown = function(event) {
+				if(event.keyCode == 13) {
+					loadEventResults(searchField.value);
+				}
+			}
 			refreshToken(); //TODO
 		}
 
@@ -73,6 +78,11 @@
 			while(resultsDiv.hasChildNodes()) {
 				resultsDiv.removeChild(resultsDiv.firstChild);
 			}
+
+			var loadingIcon = document.createElement("img");
+			loadingIcon.src = "img/loadIcon.gif";
+			loadingIcon.classList.add("load-icon");
+			resultsDiv.appendChild(loadingIcon);
 
 			console.log(query);
 			if(query.trim().length == 0) {
@@ -86,6 +96,7 @@
 
 		function loadEventResultsCallback(results) {
 			console.log(results);
+			document.querySelector("#search-results").removeChild(document.querySelector(".load-icon"));
 			var resultsArray = results.tracks.items;
 			if(resultsArray.length <= 0) {
 				var noResults = document.createElement("p");
@@ -129,7 +140,7 @@
 			image.style.float = "left";
 			image.classList.add("list-item");
 
-			request.style.float = "left";
+			request.style.float = "right";
 			request.classList.add("request");
 			request.classList.add("list-item");
 

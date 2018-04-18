@@ -43,6 +43,11 @@
 	<div class="container">
 		<h1>Want to facilitate better communication between your event-goers and live musicians?</h1>
 		<p>Your free Lucidity host account will allow you to: </p>
+		<ul>
+			<li>Create playlists and plan your DJ sets or event music.</li>
+			<li>Receive and manage music requests from your eventgoers.</li>
+			<li>Facilitate communication between you and your attendees.</li>
+		</ul>
 	</div>
 	<div class="container">
 
