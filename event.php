@@ -74,15 +74,15 @@
 		}
 
 		function loadEventResults(query) {
+			var errorDiv = document.querySelector(".error");
+			while(errorDiv.hasChildNodes()) {
+				errorDiv.removeChild(errorDiv.firstChild);
+			}
+
 			var resultsDiv = document.querySelector("#search-results");
 			while(resultsDiv.hasChildNodes()) {
 				resultsDiv.removeChild(resultsDiv.firstChild);
 			}
-
-			var loadingIcon = document.createElement("img");
-			loadingIcon.src = "img/loadIcon.gif";
-			loadingIcon.classList.add("load-icon");
-			resultsDiv.appendChild(loadingIcon);
 
 			console.log(query);
 			if(query.trim().length == 0) {
@@ -90,6 +90,10 @@
 			}
 			else {
 				//refreshToken(); // Do this?
+				var loadingIcon = document.createElement("img");
+				loadingIcon.src = "img/loadIcon.gif";
+				loadingIcon.classList.add("load-icon");
+				resultsDiv.appendChild(loadingIcon);
 				var results = lookupTrack(query, loadEventResultsCallback);
 			}
 		}
