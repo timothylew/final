@@ -31,6 +31,8 @@ h1 {
 	padding-left: 60px;
 	padding-right: 10px;
 	text-align: left;
+	line-height: 20px;
+	/*background-color: #7cad64;*/
 }
 
 .about-right {
@@ -39,4 +41,19 @@ h1 {
 	padding-left: 10px;
 	padding-right: 60px;
 	text-align: left;
+	line-height: 20px;
+	/*background-color: #c3e0b8;*/
+}
+
+/* Tablet is 768px */
+@media (min-width: 768px) {
+	
+}
+/* Small desktop starts at 992px */
+@media (min-width: 992px) {
+	
+}
+/* Larger desktop starts around 1200px */
+@media (min-width: 1200px) {
+	
 }
