@@ -128,11 +128,16 @@
 			var albumName = document.createElement("p");
 			var image = document.createElement("img");
 			var request = document.createElement("button");
+			var table = document.createElement("table");
+			var row = document.createElement("tr");
+			var column1 = document.createElement("td");
+			var column2 = document.createElement("td");
+			var column3 = document.createElement("td");
 			songName.innerHTML = song;
 			artistName.innerHTML = artist;
 			albumName.innerHTML = album;
 			image.src = imageURL;
-			image.style.setProperty("width", "100px");
+			image.classList.add("list-image");
 			request.innerHTML = "Request";
 
 			var songInformation = document.createElement("div");
@@ -142,24 +147,41 @@
 			songInformation.classList.add("list-item");
 
 			image.style.float = "left";
+			songInformation.style.float = "left";
 			image.classList.add("list-item");
 
-			request.style.float = "right";
 			request.classList.add("request");
 			request.classList.add("list-item");
 
 			request.onclick = function() {
 				this.innerHTML = "Requested";
 				this.classList.add("requested");
+				// sendRequest()
 			}
 
-			container.appendChild(request);
-			container.appendChild(image);
-			container.appendChild(songInformation);
+			column1.appendChild(image);
+			column2.appendChild(songInformation);
+			column3.appendChild(request);
+			column1.classList.add("column1");
+			column2.classList.add("column2");
+			column3.classList.add("column3");
+
+
+			row.appendChild(column1);
+			row.appendChild(column2);
+			row.appendChild(column3);
+
+			table.appendChild(row);
+
+			container.appendChild(table);
 
 			container.classList.add("list-object");
 
 			document.querySelector("#search-results").appendChild(container);
+		}
+
+		function sendRequest() {
+
 		}
 
 	</script>
