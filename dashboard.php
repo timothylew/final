@@ -21,28 +21,32 @@
 	<?php include 'nav.php'; ?>
 	<div class="container">
 		<div class="dashboard_top">
-			<h2 style="float:left; text-align: center;">Create an event code:</h2>
-			<form action="dashboard.php" method="POST">
-				<div>
-					<label for="event-id" class="text-paragraph">Event Code:</label>
-					<div>
-						<input type="text" id="event-id" name="event" placeholder="Event Code">
-					</div>
-				</div> 
-			</form>
+			<table>
+				<tr>
+					<td><h2>Create an event code:</h2></td>
+					<td>
+						<form action="dashboard.php" method="POST">
+						<div>
+							<label for="event-id" class="text-paragraph">Event Code:</label>
+							<div>
+								<input type="text" id="event-id" name="event" placeholder="Event Code">
+							</div>
+						</div> 
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td><h2>Select an existing code:</h2></td>
+					<td>
+						<select class="select-option event-select">
+							<option value="">No available events.</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		
 		</div>
-		<div class="clear"></div>
-		<div class="dashboard_top">
-			<p style="float:left;">or</p>
-		</div>
-		<div class="clear"></div>
-		<div class="dashboard_top">
-			<h2 style="float:left;">Select an existing code: </h2>
-			<select class="select-option event-select">
-				<option value="">No available events.</option>
-			</select>
-		</div>
-		<div class="clear"></div>
+		
 
 		<!-- <div class="dashboard_container"> -->
 
@@ -120,49 +124,27 @@
 			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
 		}
 
-		// function processEventCode(code) {
-		// 	//eventCode.classList.add("code-submitted");
-		// 	var searchDiv = document.createElement("div");
-		// 	var searchField = document.createElement("input");
-		// 	var searchButton = document.createElement("button");
-		// 	searchField.id = "search-field";
-		// 	searchField.placeholder = "Search for a song...";
-		// 	searchButton.id = "search-button";
-		// 	searchField.type = "text";
-		// 	searchDiv.appendChild(searchField);
-		// 	searchButton.innerHTML = "Search";
-		// 	searchDiv.appendChild(searchButton);
-		// 	document.querySelector("#search-area").appendChild(searchDiv);
-		// 	searchButton.onclick = function() {
-		// 		loadEventResults(searchField.value);
-		// 	}
-		// }
-
-		// function loadEventResults(query) {
-		// 	console.log(query);
-		// 	if(query.trim().length == 0) {
-		// 		createAlert("Search field cannot be empty.", "red");
-		// 	}
-		// 	else {
-		// 		// Make search request here.
-		// 		createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718");
-		// 	}
-		// }
-
 		function createEventElement(song, artist, album, imageURL, type) {
 			// for each result, we must call this function
+			// for each result, we must call this function
 			var container = document.createElement("div");
-			var songName = document.createElement("h3");
+			var songName = document.createElement("p");
 			var artistName = document.createElement("p");
 			var albumName = document.createElement("p");
 			var image = document.createElement("img");
-			var request = document.createElement("button");
+			var dismiss = document.createElement("span");
+			var table = document.createElement("table");
+			var row = document.createElement("tr");
+			var column1 = document.createElement("td");
+			var column2 = document.createElement("td");
+			var column3 = document.createElement("td");
 			songName.innerHTML = song;
 			artistName.innerHTML = artist;
 			albumName.innerHTML = album;
 			image.src = imageURL;
-			image.style.setProperty("width", "100px");
-			request.innerHTML = "Request";
+			image.classList.add("list-image");
+			dismiss.innerHTML = "&times;";
+			dismiss.classList.add("dismiss-button");
 
 			var songInformation = document.createElement("div");
 			songInformation.appendChild(songName);
@@ -171,20 +153,28 @@
 			songInformation.classList.add("list-item");
 
 			image.style.float = "left";
+			songInformation.style.float = "left";
 			image.classList.add("list-item");
 
-			request.style.float = "left";
-			request.classList.add("request");
-			request.classList.add("list-item");
-
-			request.onclick = function() {
-				this.innerHTML = "Requested";
-				this.classList.add("requested");
+			dismiss.onclick = function() {
+				container.classList.add("remove-item");
 			}
 
-			container.appendChild(request);
-			container.appendChild(image);
-			container.appendChild(songInformation);
+			column1.appendChild(image);
+			column2.appendChild(songInformation);
+			column3.appendChild(dismiss);
+			column1.classList.add("column1");
+			column2.classList.add("column2");
+			column3.classList.add("column3");
+
+
+			row.appendChild(column1);
+			row.appendChild(column2);
+			row.appendChild(column3);
+
+			table.appendChild(row);
+
+			container.appendChild(table);
 
 			container.classList.add("list-object");
 

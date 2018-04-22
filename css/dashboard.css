@@ -1,13 +1,31 @@
+.column1 {
+	width: 20%;
+}
+
+.column2 {
+	width: 60%;
+}
+
+.column3 {
+	width: 20%;
+	text-align: center;
+}
+
+.dismiss-button:hover{
+	color: black;
+}
+
 .list-item {
-	top: 50%;
-	bottom: 50%;
 	margin: 0px 15px;
+}
+
+.list-image {
+	width: 50px;
 }
 
 .list-object {
 	height: 100px;
 	margin: 15px 0px;
-	border-left: 1px solid green;
 	padding: 10px 0px;
 }
 
@@ -23,7 +41,7 @@
 }
 
 .dashboard_top {
-	width: 50%;
+	width: 80%;
 	margin: auto;
 	text-align: center;
 }
@@ -63,6 +81,37 @@
 	transition: background 0.5s ease-in-out;
 }
 
+.remove-item {
+	visibility: hidden;
+	height: 0px;
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	width: 100%;
+}
+
+tr {
+	width: 50%;
+	text-align: left;
+}
+
 button {
 	width: 180px;
+}
+
+/* Tablet is 768px */
+@media (min-width: 768px) {
+	.list-image {
+		width: 100px;
+	}
+}
+/* Small desktop starts at 992px */
+@media (min-width: 992px) {
+	
+}
+/* Larger desktop starts around 1200px */
+@media (min-width: 1200px) {
+	
 }

@@ -51,6 +51,14 @@
 		</div>
 	</div>
 
+	<!-- <div id="beta">
+		<h2>User Testing Request</h2>
+		<p>We are currently in the process of collecting more information about how our users use Lucidity. Join us and help build a better event experience with us.</p>
+		<form method="POST" action="index.php">
+			<input type="email" name="email-input">
+		</form>
+	</div> -->
+
 	<div id="contact">
 		<h2>Have questions? Send us an email at lucidity@timothylew.com</h2>
 		<p>Made for DJs, by a <a href="https://www.soundcloud.com/lewcidmusic" target="_blank">DJ.</a>

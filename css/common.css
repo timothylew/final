@@ -3,7 +3,6 @@ body {
 	font-family: 'Questrial', sans-serif;
 	color: white;
 	margin: 0;
-	/*background: linear-gradient(to right, black 50%, green);*/
 }
 
 a {
@@ -90,7 +89,7 @@ button:hover {
 .close-alert {
 	display: none;
 }
-/* The close button */
+
 .closebtn {
     margin-left: 15px;
     color: white;
@@ -102,7 +101,6 @@ button:hover {
     transition: 0.3s;
 }
 
-/* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
 }
