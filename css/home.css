@@ -6,6 +6,18 @@ h1 {
 	padding-top: 60px;
 }
 
+td {
+	text-align: left;
+	width: 40%;
+	vertical-align: top;
+	padding: 0px 5%;
+}
+
+table {
+	width: 100%;
+}
+
+
 .container {
 	background: url("../img/home.png");
 	background-size: cover;
@@ -19,6 +31,8 @@ h1 {
 	color: black;
 	display: inline-block;
 	text-align: center;
+	padding: 0px 10%;
+	width: 80%;
 }
 
 /*#beta {
@@ -30,6 +44,10 @@ h1 {
 
 #contact {
 	text-align: center;
+}
+
+.about-text {
+	line-height: 20px;
 }
 
 .about-left{

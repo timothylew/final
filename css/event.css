@@ -7,7 +7,7 @@ table {
 }
 
 .container {
-	width: 75%;
+	width: 95%;
 }
 
 .column1 {
@@ -88,6 +88,9 @@ table {
 	}
 	#search-field {
 		width: 80%;
+	}
+	.container {
+		width: 75%;
 	}
 }
 /* Small desktop starts at 992px */

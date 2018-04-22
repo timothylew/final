@@ -51,14 +51,12 @@
 	float: left;
 	width: 49%;
 	text-align: center;
-	background-color: green;
 }
 
 .dashboard_right {
 	text-align: center;
 	float:right;
 	width: 49%;
-	background-color: red;
 }
 
 #event-id {
