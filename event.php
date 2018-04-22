@@ -62,6 +62,9 @@
 			searchButton.innerHTML = "Search";
 			searchDiv.appendChild(searchButton);
 			document.querySelector("#search-area").appendChild(searchDiv);
+			// searchField.oninput = function() {
+			// 	loadEventResults(searchField.value);
+			// }
 			searchButton.onclick = function() {
 				loadEventResults(searchField.value);
 			}
@@ -100,7 +103,10 @@
 
 		function loadEventResultsCallback(results) {
 			console.log(results);
-			document.querySelector("#search-results").removeChild(document.querySelector(".load-icon"));
+			var icon = document.querySelector(".load-icon");
+			if(icon != null) {
+				document.querySelector("#search-results").removeChild(icon);
+			}
 			var resultsArray = results.tracks.items;
 			if(resultsArray.length <= 0) {
 				var noResults = document.createElement("p");
