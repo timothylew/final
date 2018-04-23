@@ -44,32 +44,56 @@
 }
 
 .container {
-	width: 100%;
+	width: 95%;
 	text-align: center;
 }
 
-.dashboard_top {
-	width: 80%;
+.dashboard-manage-events {
+	width: 100%;
 	margin: auto;
 	text-align: center;
+	background-color: #66CDAA;
+	border-radius: 20px;
+	border-width: 2px;
 }
 
-.dashboard_left {
+.dashboard-left{
+	width: 35%;
+	vertical-align: top;
+	padding-right: 15px;
+}
+
+.dashboard-right {
+	width: 65%;
+	vertical-align: top;
+}
+
+.dashboard-manage-playlists {
 	/*border: 1px solid green;*/
-	float: left;
-	width: 49%;
+	/*float: left;*/
+	width: 100%;
 	text-align: center;
+	background-color: #81D8D0;
+	border-radius: 20px;
+	border-width: 2px;
 }
 
-.dashboard_right {
+.dashboard-manage-requests {
 	text-align: center;
-	float:right;
-	width: 49%;
+	/*float:right;*/
+	width: 100%;
+	background-color: #F08080;
+	border-radius: 20px;
+	border-width: 2px;
 }
 
 #event-id {
 	width: 180px;
 	text-align: center
+}
+
+.request-display, .playlist-display {
+	padding-bottom: 20px;
 }
 
 .select-option {

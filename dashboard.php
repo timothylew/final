@@ -20,66 +20,81 @@
 <body>
 	<?php include 'nav.php'; ?>
 	<div class="container">
-		<div class="dashboard_top">
-			<table class="manage-event">
-				<tr>
-					<td><h2>Create an event code:</h2></td>
-					<td class="input-cell">
+		<table>
+			<tr>
+				<td class="dashboard-left">
+					<div class="dashboard-manage-events">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Create Event Code</p>
 						<form action="dashboard.php" method="POST">
-						<div>
-							<label for="event-id" class="text-paragraph">Event Code:</label>
 							<div>
-								<input type="text" id="event-id" name="event" placeholder="Event Code">
-							</div>
-						</div> 
+								<label for="event-id" class="text-paragraph">Event Code:</label>
+								<div>
+									<input type="text" id="event-id" name="event" placeholder="Event Code">
+								</div>
+							</div> 
 						</form>
-					</td>
-				</tr>
-				<tr>
-					<td><h2>Select an existing code:</h2></td>
-					<td class="input-cell">
-						<select class="select-option event-select">
-							<option value="">No available events.</option>
+						<button class="create-code">Submit</button>
+						<!-- <table class="manage-event">
+							<tr>
+								<td><h2>Create an event code:</h2></td>
+								<td class="input-cell">
+									<form action="dashboard.php" method="POST">
+									<div>
+										<label for="event-id" class="text-paragraph">Event Code:</label>
+										<div>
+											<input type="text" id="event-id" name="event" placeholder="Event Code">
+										</div>
+									</div> 
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td><h2>Select an existing code:</h2></td>
+								<td class="input-cell">
+									<select class="select-option event-select">
+										<option value="">No available events.</option>
+									</select>
+								</td>
+							</tr>
+						</table> -->
+					
+					</div>
+				</td>
+			
+
+			<!-- <div class="dashboard_container"> -->
+
+				<td class="dashboard-right">
+					<div class="dashboard-manage-requests">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Manage Requests</p>
+						<!-- <table style="width: 70%;">
+							<tr>
+								<td><p>Select an event code:</p></td>
+								<td class="input-cell">
+									<select class="select-option event-select">
+										<option value="">No available events.</option>
+									</select>
+								</td>
+							</tr>
+						</table> -->
+						<button class="request-refresh">Refresh</button>
+						<div class="request-display">No requests loaded.</div>
+					</div>
+					<div class="dashboard-manage-playlists">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Playlists</p>
+
+						<select class="select-option playlist-select">
+							<option value="">--Select a playlist--</option>
+							<option value="test"> Test item </option>
 						</select>
-					</td>
-				</tr>
-			</table>
-		
-		</div>
-		
 
-		<!-- <div class="dashboard_container"> -->
+						<button class="create-playlist">Create new playlist</button>
 
-
-			<div class="dashboard_left">
-				<h2>Plan your DJ set</h2>
-
-				<select class="select-option playlist-select">
-					<option value="">--Select a playlist--</option>
-					<option value="test"> Test item </option>
-				</select>
-
-				<button class="create-playlist">Create new playlist</button>
-
-				<div class="playlist-display">No playlist loaded.</div>
-			</div>
-
-
-			<div class="dashboard_right">
-				<h2>Manage Requests</h2>
-				<!-- <table style="width: 70%;">
-					<tr>
-						<td><p>Select an event code:</p></td>
-						<td class="input-cell">
-							<select class="select-option event-select">
-								<option value="">No available events.</option>
-							</select>
-						</td>
-					</tr>
-				</table> -->
-				<button class="request-refresh">Refresh</button>
-				<div class="request-display">No requests loaded.</div>
-			</div>
+						<div class="playlist-display">No playlist loaded.</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 		<!-- </div> -->
 		<div class="clear"></div>
 	</div>
@@ -100,10 +115,10 @@
 			}
 		}
 
-		eventSelect.onchange = function() {
-			console.log(eventSelect.value);
-			processEventCode(eventSelect.value);
-		}
+		// eventSelect.onchange = function() {
+		// 	console.log(eventSelect.value);
+		// 	processEventCode(eventSelect.value);
+		// }
 
 		playlistSelect.onchange = function() {
 			console.log(playlistSelect.value);
