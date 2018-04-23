@@ -92,14 +92,13 @@
 		var playlistDiv = document.querySelector(".playlist-display");
 		var refreshButton = document.querySelector(".request-refresh");
 
-		// eventCode.oninput = function() {
-		// 	console.log(eventCode.value.length);
-		// 	if(eventCode.value.length >= 5) {
-		// 		eventCode.disabled = true;
-		// 		document.querySelector("#code-instruction").innerHTML = "<a href=event.php>Enter a different code.</a>";
-		// 		processEventCode(eventCode.value);
-		// 	}
-		// }
+		eventCode.onkeydown = function(event) {
+			console.log(eventCode.value.length);
+			if(eventCode.value.length >= 5 && (event.keyCode != 8 && event.keyCode != 46)) {
+				// Prevent the user from typing in more than 5 characters.
+				return false;
+			}
+		}
 
 		eventSelect.onchange = function() {
 			console.log(eventSelect.value);
