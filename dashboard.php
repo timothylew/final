@@ -21,10 +21,10 @@
 	<?php include 'nav.php'; ?>
 	<div class="container">
 		<div class="dashboard_top">
-			<table>
+			<table class="manage-event">
 				<tr>
 					<td><h2>Create an event code:</h2></td>
-					<td>
+					<td class="input-cell">
 						<form action="dashboard.php" method="POST">
 						<div>
 							<label for="event-id" class="text-paragraph">Event Code:</label>
@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td><h2>Select an existing code:</h2></td>
-					<td>
+					<td class="input-cell">
 						<select class="select-option event-select">
 							<option value="">No available events.</option>
 						</select>
@@ -67,6 +67,16 @@
 
 			<div class="dashboard_right">
 				<h2>Manage Requests</h2>
+				<!-- <table style="width: 70%;">
+					<tr>
+						<td><p>Select an event code:</p></td>
+						<td class="input-cell">
+							<select class="select-option event-select">
+								<option value="">No available events.</option>
+							</select>
+						</td>
+					</tr>
+				</table> -->
 				<button class="request-refresh">Refresh</button>
 				<div class="request-display">No requests loaded.</div>
 			</div>

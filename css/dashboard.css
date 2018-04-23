@@ -35,6 +35,14 @@
 	text-align: center
 }
 
+.manage-event {
+	width: 60%;
+}
+
+.input-cell {
+	text-align: center;
+}
+
 .container {
 	width: 100%;
 	text-align: center;
