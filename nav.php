@@ -8,6 +8,7 @@
 			<li class="nav-element" style="float:right;"><a href="event.php">Request Song</a></li>
 			<li class="nav-element" style="float:right;"><a href="login.php">Host Login</a></li>
 		<?php endif; ?>
+		<li class="nav-element" style="float:right;"><a href="about.php">About</a></li>
 	</ul>
 </div>
 
