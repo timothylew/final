@@ -19,6 +19,7 @@
 </head>
 <body>
 	<?php include 'nav.php'; ?>
+	<div class="error"></div>
 	<div class="container">
 		<table>
 			<tr>
@@ -102,6 +103,7 @@
 	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript">
 		var eventCode = document.querySelector("#event-id");
+		var createEvent = document.querySelector(".create-code");
 		var eventSelect = document.querySelector(".event-select");
 		var playlistSelect = document.querySelector(".playlist-select");
 		var playlistDiv = document.querySelector(".playlist-display");
@@ -112,6 +114,20 @@
 			if(eventCode.value.length >= 5 && (event.keyCode != 8 && event.keyCode != 46)) {
 				// Prevent the user from typing in more than 5 characters.
 				return false;
+			}
+		}
+
+		createEvent.onclick = function() {
+			var errorDiv = document.querySelector(".error");
+			while(errorDiv.hasChildNodes()) {
+				errorDiv.removeChild(errorDiv.firstChild);
+			}
+			console.log(eventCode.value);
+			if(eventCode.value.length < 5) {
+				createAlert("Code must be 5 characters long.", "red");
+			}
+			else {
+				createAlert("Code successfully created.", "green");
 			}
 		}
 
