@@ -13,6 +13,7 @@
 
 .dismiss-button:hover{
 	color: black;
+	cursor: pointer;
 }
 
 .list-item {
@@ -57,14 +58,21 @@
 	border-width: 2px;
 }
 
+.dashboard-manage-events input:focus, .dashboard-manage-events button:hover{
+	transition: background 0.5s ease-in-out;
+	background-color: #66CDAA;
+	border-color: white;
+	color: white;
+}
+
 .dashboard-left{
-	width: 35%;
+	width: 25%;
 	vertical-align: top;
 	padding-right: 15px;
 }
 
 .dashboard-right {
-	width: 65%;
+	width: 75%;
 	vertical-align: top;
 }
 
@@ -78,6 +86,13 @@
 	border-width: 2px;
 }
 
+.dashboard-manage-playlists input:focus, .dashboard-manage-playlists button:hover{
+	transition: background 0.5s ease-in-out;
+	background-color: #81D8D0;
+	border-color: white;
+	color: white;
+}
+
 .dashboard-manage-requests {
 	text-align: center;
 	/*float:right;*/
@@ -85,6 +100,13 @@
 	background-color: #F08080;
 	border-radius: 20px;
 	border-width: 2px;
+}
+
+.dashboard-manage-requests input:focus, .dashboard-manage-requests button:hover{
+	transition: background 0.5s ease-in-out;
+	background-color: #F08080;
+	border-color: white;
+	color: white;
 }
 
 #event-id {
