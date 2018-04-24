@@ -110,7 +110,7 @@
 }
 
 #event-id {
-	width: 180px;
+	width: 100px;
 	text-align: center
 }
 
@@ -150,7 +150,7 @@ tr {
 }
 
 button {
-	width: 180px;
+	width: 110px;
 }
 
 /* Tablet is 768px */
@@ -158,6 +158,13 @@ button {
 	.list-image {
 		width: 100px;
 	}
+	button {
+		width: 180px;
+	}
+	#event-id {
+		width: 180px;
+	}
+
 }
 /* Small desktop starts at 992px */
 @media (min-width: 992px) {
