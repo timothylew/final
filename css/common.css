@@ -26,13 +26,13 @@ a {
 	float: left;
 	padding: 8px;
 	text-align: center;
-	height: 50px;
+	height: 25px;
 	vertical-align: middle;
 }
 
 .nav-element-link {
 	width: 60px;
-	line-height: 50px;
+	line-height: 25px;
 }
 
 /*.nav-element-link:hover {
@@ -115,4 +115,13 @@ button:hover {
 
 .closebtn:hover {
     color: black;
+}
+
+@media (min-width: 400px) {
+	.nav-element-link {
+		line-height: 50px;
+	}
+	.nav-element {
+		height: 50px;
+	}
 }

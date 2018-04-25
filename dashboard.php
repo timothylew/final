@@ -89,7 +89,7 @@
 							<option value="test"> Test item </option>
 						</select>
 
-						<button class="create-playlist">Create new playlist</button>
+						<!-- <button class="create-playlist">Create new playlist</button> -->
 
 						<div class="playlist-display">No playlist loaded.</div>
 					</div>
