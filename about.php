@@ -41,7 +41,7 @@
 			<br>
 			<li>Request Page: Click on the "Request Song" button on the nav bar.  On this page, enter any 5 character code as your event code.  Upon completion of this, a search bar will appear.  Search any song using this input field, and the results will populate underneath.  You may request songs from the results using the Request button that will appear.</li>
 			<br>
-			<li>Dashboard Page: Login to the system and click on Dashboard in the nav bar.  Right now, hard coded values will populate when you click on the "Refresh" buttons or if you select an item from the selects.</li>
+			<li>Manage Page: Login to the system and click on Manage in the nav bar.  This page will allow you to manage events and requests.  Right now, hard coded values will populate when you click on the "Refresh" buttons or if you select an item from the selects.</li>
 		</ul>
 
 		<h3>3. Database:</h3>
