@@ -11,7 +11,8 @@
 	
 	// DB Connection
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		hash('sha256', $_POST['password']); //TODO
+
+		$password_hash = hash('sha256', $_POST['password']); 
 
 		// Checks to see if there is an error number and then prints out the error
 		if($mysqli->connect_errno) {
@@ -22,30 +23,10 @@
 		// Set character encoding
 		$mysqli->set_charset('utf8');
 
-
 		$sql = "INSERT INTO users (username, email, password_hash)
-				VALUES('" . $_POST['username'] . "', " .
-					$genre_id . ", " .
-					$rating_id . ", " .
-					$label_id . ", " . 
-					$format_id . ", " .
-					$sound_id;
-
-		if($nullAward) {
-			$sql = $sql . ", " . $award . ", "; 
-		}
-		else {
-			$sql = $sql . ", '" . $award . "', "; 
-		}
-
-		if($release_date == "null") {
-			$sql = $sql . $release_date;
-		}
-		else {
-			$sql = $sql . "DATE'" . $release_date . "'";
-		}
-					
-		$sql = $sql . ");";
+				VALUES('" . $_POST['username'] . "', '" .
+					$_POST['email'] . "', '" .
+					$password_hash . "');";
 
 		$results = $mysqli->query($sql);
 		if(!$results) {
@@ -55,5 +36,5 @@
 
 		// Close the connection.
 		$mysqli->close();
-
+		echo "successful_query";
 ?>

@@ -57,7 +57,7 @@
 			</div>
 		<?php endif; ?> -->
 
-		<form action="register.php" method="POST">
+		<form id="registration-form" action="register.php" method="POST">
 			<div>
 				<label for="username-id" class="text-paragraph">Username:</label>
 				<div>
@@ -94,7 +94,9 @@
 	<script type="text/javascript" src="util.js"></script>
 
 	<script type="text/javascript">
-		document.querySelector("form").onsubmit = function() {
+		var processed = false;
+
+		document.querySelector("#registration-form").onsubmit = function(event) {
 
 			// Remove existing error notifications.
 			var errorDiv = document.querySelector(".error");
@@ -106,6 +108,7 @@
 			var validRegistration = true;
 			var username = document.querySelector("#username-id");
 			var password = document.querySelector("#password-id");
+			var email = document.querySelector("#email-id");
 			var passwordConfirm = document.querySelector("#password-confirm");
 
 			if(password.value != passwordConfirm.value) {
@@ -127,7 +130,49 @@
 				createAlert("Confirm password must not be empty.", red)
 			}
 
-			return validRegistration;
+			// TODO fix async issue.
+			if(validRegistration) {
+				console.log( registerUser(username.value, email.value, password.value) );
+				return false;
+			}
+			else{
+				return false;
+			}
+			
+
+			// while(!processed) {
+			// 	// Wait
+			// }
+			
+			//return processed;
+		}
+
+		function registerUser(username_process, email_process, password_process) {
+			var request = new XMLHttpRequest();
+			request.addEventListener("readystatechange", function() {
+				if(request.readyState == XMLHttpRequest.DONE) {
+					if(request.status == 200) {
+						console.log(request.responseText);
+						if(request.responseText != "successful_query") {
+							createAlert("Registration error.", "red");
+							return false;
+						}
+						else {
+							processed = true;
+							return true;
+						}
+					}
+					else {
+						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+						return false;
+					}
+				}
+			});
+
+			request.open("POST", "api/register.php");
+			console.log("username=" + username_process + "&email=" + email_process + "&password=" + password_process);
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.send("username=" + username_process + "&email=" + email_process + "&password=" + password_process);
 		}
 
 	</script>
