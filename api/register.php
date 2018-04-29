@@ -36,5 +36,6 @@
 
 		// Close the connection.
 		$mysqli->close();
+		$_SESSION['account_created'] = "set";
 		echo "successful_query";
 ?>

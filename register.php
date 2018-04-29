@@ -130,21 +130,11 @@
 				createAlert("Confirm password must not be empty.", red)
 			}
 
-			// TODO fix async issue.
 			if(validRegistration) {
-				console.log( registerUser(username.value, email.value, password.value) );
-				return false;
-			}
-			else{
-				return false;
+				registerUser(username.value, email.value, password.value);
 			}
 			
-
-			// while(!processed) {
-			// 	// Wait
-			// }
-			
-			//return processed;
+			return false;
 		}
 
 		function registerUser(username_process, email_process, password_process) {
@@ -155,16 +145,13 @@
 						console.log(request.responseText);
 						if(request.responseText != "successful_query") {
 							createAlert("Registration error.", "red");
-							return false;
 						}
 						else {
-							processed = true;
-							return true;
+							window.location.replace("login.php");
 						}
 					}
 					else {
 						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
-						return false;
 					}
 				}
 			});
