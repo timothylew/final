@@ -68,7 +68,35 @@
 
 			// TODO verify login
 
-			return validLogin;
+			if(validLogin) {
+				authenticateUser(username, password);
+			}
+
+			return false;
+		}
+
+		function authenticateUser(username, password) {
+			var request = new XMLHttpRequest();
+			request.addEventListener("readystatechange", function() {
+				if(request.readyState == XMLHttpRequest.DONE) {
+					if(request.status == 200) {
+						console.log(request.responseText);
+						if(request.responseText != "successful_query") {
+							createAlert("Login Error", "red");
+						}
+						else {
+							window.location.replace("dashboard.php");
+						}
+					}
+					else {
+						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+					}
+				}
+			});
+
+			request.open("POST", "api/authenticate.php");
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.send("username=" + username + "&password=" + password);
 		}
 	</script>
 </body>

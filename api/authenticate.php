@@ -33,6 +33,13 @@
 		exit();
 	}
 
+	if($results->num_rows <= 0) {
+		echo "Error: No user found.";
+		exit();
+	}
+
+	$results_array = $results->fetch_assoc();
+
 	$password_hash = hash('sha256', $_POST['password']); 
 	$_SESSION['current_user'] = 12;
 
