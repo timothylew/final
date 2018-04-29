@@ -38,10 +38,13 @@
 		exit();
 	}
 
-	$results_array = $results->fetch_assoc();
-
-	$password_hash = hash('sha256', $_POST['password']); 
-	$_SESSION['current_user'] = 12;
+	$row = $results->fetch_assoc();
+	if($row['password_hash'] != hash('sha256', $_POST['password'])) {
+		echo "Error: Password incorrect.";
+		exit();
+	} else {
+		$_SESSION['current_user'] = $row['user_id'];
+	}
 
 	// Close the connection.
 	$mysqli->close();

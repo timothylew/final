@@ -1,7 +1,5 @@
 <?php
 	session_start();
-	// TODO TEMP REMOVE
-	$_SESSION['current_user'] = 12;
 	if(!isset($_SESSION['current_user']) || empty($_SESSION['current_user'])) {
 		header("Location: login.php");
 	}
