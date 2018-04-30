@@ -3,6 +3,32 @@
 	if(!isset($_SESSION['current_user']) || empty($_SESSION['current_user'])) {
 		header("Location: login.php");
 	}
+	else {
+		require 'config/config.php';
+
+		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+		// Checks to see if there is an error number and then prints out the error
+		if($mysqli->connect_errno) {
+			echo $mysqli->connect_error;
+			exit();
+		}
+
+		// Set character encoding
+		$mysqli->set_charset('utf8');
+
+		$sql = "SELECT * FROM events 
+				WHERE owner_id = '" . $_SESSION['current_user'] . "';"; 
+
+		$results = $mysqli->query($sql);
+		if(!$results) {
+			echo $mysqli->error;
+			exit();
+		}
+
+		// Close the connection.
+		$mysqli->close();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +102,19 @@
 								</td>
 							</tr>
 						</table> -->
-						<button class="request-refresh">Refresh</button>
+						<div>
+							<select class="select-option event-select">
+								<option value="">--Select event code--</option>
+								<?php while($row = $results->fetch_assoc()) : ?>
+									<option value="<?php echo $row['event_code']; ?>">
+										<?php echo $row['event_code']; ?>
+									</option>
+								<?php endwhile; ?>
+							</select>
+						</div>
+						<div>
+							<button class="request-refresh">Refresh</button>
+						</div>
 						<div class="request-display">No requests loaded.</div>
 					</div>
 					<div class="dashboard-manage-playlists">
@@ -129,10 +167,10 @@
 			}
 		}
 
-		// eventSelect.onchange = function() {
-		// 	console.log(eventSelect.value);
-		// 	processEventCode(eventSelect.value);
-		// }
+		eventSelect.onchange = function() {
+			console.log(eventSelect.value);
+			refreshRequests();
+		}
 
 		playlistSelect.onchange = function() {
 			console.log(playlistSelect.value);
@@ -245,6 +283,8 @@
 			request.open("GET", "api/createEvent.php?event_code=" + code);
 			request.send();
 		}
+
+
 	</script>
 
 </body>
