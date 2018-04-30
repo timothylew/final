@@ -169,7 +169,7 @@
 
 		eventSelect.onchange = function() {
 			console.log(eventSelect.value);
-			refreshRequests();
+			refreshRequests(eventSelect.value);
 		}
 
 		playlistSelect.onchange = function() {
@@ -184,7 +184,7 @@
 		}
 
 		refreshButton.onclick = function() {
-			refreshRequests();
+			refreshRequests(eventSelect.value);
 		}
 
 		function loadPlaylist(playlist) {
@@ -193,11 +193,15 @@
 			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "playlist");
 		}
 
-		function refreshRequests() {
+		function refreshRequests(code) {
 			document.querySelector(".request-display").innerHTML = ""; // TODO fix this
 			//Test objects
-			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
-			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
+
+			if(code != "") {
+				createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
+				createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
+				getEventRequests(code);
+			}
 		}
 
 		function createEventElement(song, artist, album, imageURL, type) {

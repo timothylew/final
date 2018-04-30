@@ -88,3 +88,19 @@ function retrieveSeveralTracks(idList, callback) {
 	request.open("GET", "api/retrieveSeveralTracks.php" + spotifyQuery);
 	request.send();
 }
+
+function getEventRequests(eventCode) {
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(request.responseText);
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/getEventRequests.php?event_code=" + eventCode);
+	request.send();
+}
