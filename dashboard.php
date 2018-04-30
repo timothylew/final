@@ -198,9 +198,51 @@
 			//Test objects
 
 			if(code != "") {
-				createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
-				createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
-				getEventRequests(code);
+				// createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
+				// createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
+				getEventRequests(code, refreshRequestsCallback);
+			}
+		}
+
+		function refreshRequestsCallback(results) {
+			console.log(results);
+			//TODO implement logic to split into sets of 50 later...
+			if(results.length > 0) {
+				var spotifyQuery = "";
+				for(var i = 0; i < results.length; i++) {
+					spotifyQuery += results[i]['song_id'];
+					if(i != results.length - 1) {
+						spotifyQuery += ",";
+					}
+				}
+
+				console.log(spotifyQuery);
+				retrieveSeveralTracks(spotifyQuery, retrieveTracksCallback);
+			}
+			else {
+				var noResults = document.createElement("p");
+				noResults.innerHTML = "No requests at the moment.";
+				document.querySelector(".request-display").appendChild(noResults);
+			}
+		}
+
+		function retrieveTracksCallback(results) {
+			console.log(results);
+			var resultsArray = results.tracks;
+			if(resultsArray.length <= 0) {
+				var noResults = document.createElement("p");
+				noResults.innerHTML = "No requests at the moment.";
+				document.querySelector(".request-display").appendChild(noResults);
+			}
+			for(var i = 0; i < resultsArray.length; i++) {
+				var artistString = "";
+				for(var j = 0; j < resultsArray[i].album.artists.length; j++) {
+					artistString += resultsArray[i].album.artists[j].name;
+					if(j != resultsArray[i].album.artists.length - 1) {
+						artistString += ", ";
+					}
+				}
+				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, "request");
 			}
 		}
 

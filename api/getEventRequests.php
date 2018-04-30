@@ -32,7 +32,10 @@
 	// Close the connection.
 	$mysqli->close();
 
+	$array = array();
+
 	while($row = $results->fetch_assoc()) {
-		echo json_encode($row);
+		array_push($array, $row);
 	}
+	echo json_encode($array);
 ?>

@@ -73,12 +73,14 @@ function lookupTrack(query, code, callback) {
 }
 
 function retrieveSeveralTracks(idList, callback) {
+	//refreshToken(); TODO need to figure out token authenticity somehow
 	var spotifyQuery = "?ids=" + idList;
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				console.log(request.responseText);
+				//console.log(request.responseText);
+				callback(JSON.parse(request.responseText));
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
@@ -89,12 +91,13 @@ function retrieveSeveralTracks(idList, callback) {
 	request.send();
 }
 
-function getEventRequests(eventCode) {
+function getEventRequests(eventCode, callback) {
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				console.log(request.responseText);
+				callback(JSON.parse(request.responseText));
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
