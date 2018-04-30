@@ -20,8 +20,27 @@
 	// Set character encoding
 	$mysqli->set_charset('utf8');
 
-	$sql = "INSERT INTO requests
-			VALUES()";
+	$sql = "SELECT * FROM requests
+			WHERE event_code = '" . $_GET['event_code'] . "'
+			AND song_id = '" . $_GET['songID'] . "';";
+
+	$results = $mysqli->query($sql);
+	if(!$results) {
+		echo $mysqli->error;
+		exit();
+	}
+
+	if($results->num_rows <= 0) {
+		$sql = "INSERT INTO requests(event_code, song_id, frequency)
+			VALUES('" . $_GET['event_code'] . "', '" . $_GET['songID'] . "', 1);";
+	}
+	else {
+		$row = $results->fetch_assoc();
+		$sql = "UPDATE requests 
+				SET frequency = " . ($row['frequency'] + 1) . "
+				WHERE request_id = " . $row['request_id'] . ";"; 
+	}
+
 
 
 	$results = $mysqli->query($sql);

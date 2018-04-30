@@ -53,7 +53,7 @@ function refreshToken() {
 	request.send();
 }
 
-function lookupTrack(query, callback) {
+function lookupTrack(query, code, callback) {
 	var spotifyQuery = "?q=" + query.replace(" ", "+");
 	console.log(spotifyQuery);
 	var request = new XMLHttpRequest();
@@ -61,7 +61,7 @@ function lookupTrack(query, callback) {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				//console.log(request.responseText);
-				callback(JSON.parse(request.responseText));
+				callback(JSON.parse(request.responseText), code);
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");

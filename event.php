@@ -68,17 +68,17 @@
 			// 	loadEventResults(searchField.value);
 			// }
 			searchButton.onclick = function() {
-				loadEventResults(searchField.value);
+				loadEventResults(searchField.value, code);
 			}
 			searchField.onkeydown = function(event) {
 				if(event.keyCode == 13) {
-					loadEventResults(searchField.value);
+					loadEventResults(searchField.value, code);
 				}
 			}
 			refreshToken(); //TODO
 		}
 
-		function loadEventResults(query) {
+		function loadEventResults(query, code) {
 			var errorDiv = document.querySelector(".error");
 			while(errorDiv.hasChildNodes()) {
 				errorDiv.removeChild(errorDiv.firstChild);
@@ -99,11 +99,11 @@
 				loadingIcon.src = "img/loadIcon.gif";
 				loadingIcon.classList.add("load-icon");
 				resultsDiv.appendChild(loadingIcon);
-				var results = lookupTrack(query, loadEventResultsCallback);
+				var results = lookupTrack(query, code, loadEventResultsCallback);
 			}
 		}
 
-		function loadEventResultsCallback(results) {
+		function loadEventResultsCallback(results, code) {
 			console.log(results);
 			var icon = document.querySelector(".load-icon");
 			if(icon != null) {
@@ -123,12 +123,12 @@
 						artistString += ", ";
 					}
 				}
-				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url);
+				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, resultsArray[i].id, code);
 			}
 
 		}
 
-		function createEventElement(song, artist, album, imageURL) {
+		function createEventElement(song, artist, album, imageURL, songID, code) {
 			// for each result, we must call this function
 			var container = document.createElement("div");
 			var songName = document.createElement("p");
@@ -164,7 +164,9 @@
 			request.onclick = function() {
 				this.innerHTML = "Requested";
 				this.classList.add("requested");
-				// sendRequest()
+				this.disabled = true;
+				console.log(songID);
+				sendRequest(songID, code);
 			}
 
 			column1.appendChild(image);
@@ -188,8 +190,25 @@
 			document.querySelector("#search-results").appendChild(container);
 		}
 
-		function sendRequest() {
-
+		function sendRequest(songID, code) {
+			var request = new XMLHttpRequest();
+			request.addEventListener("readystatechange", function() {
+				if(request.readyState == XMLHttpRequest.DONE) {
+					if(request.status == 200) {
+						if(request.responseText == "false") {
+							createAlert("Event does not exist.", "red");
+						}
+						else if(request.responseText == "true") {
+							processEventCode(code);
+						}
+					}
+					else {
+						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+					}
+				}
+			});
+			request.open("GET", "api/submitRequest.php?event_code=" + code + "&songID=" + songID);
+			request.send();
 		}
 
 		function validateEvent(code) {
