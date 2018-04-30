@@ -2,8 +2,8 @@
 
 /* * * * * 
 
-	/api/submitRequest.php
-	API function that lets users submit song requests to a specific event code.
+	/api/validateEvent
+	API function that echos true or false to tell the caller whether or not an event code exists in the database.
 	
 * * * * */
 	require '../config/config.php';
@@ -20,9 +20,8 @@
 	// Set character encoding
 	$mysqli->set_charset('utf8');
 
-	$sql = "INSERT INTO requests
-			VALUES()";
-
+	$sql = "SELECT * FROM events 
+			WHERE event_code = '" . $_GET['event_code'] . "';"; 
 
 	$results = $mysqli->query($sql);
 	if(!$results) {
@@ -30,8 +29,13 @@
 		exit();
 	}
 
+	if($results->num_rows <= 0) {
+		echo "false";
+	}
+	else {
+		echo "true";
+	}
+
 	// Close the connection.
 	$mysqli->close();
-	echo "successful_query";
-
 ?>

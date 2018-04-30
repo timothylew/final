@@ -40,12 +40,14 @@
 	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript">
 		var eventCode = document.querySelector("#event-code");
+
 		eventCode.oninput = function() {
 			console.log(eventCode.value.length);
 			if(eventCode.value.length >= 5) {
 				eventCode.disabled = true;
 				document.querySelector("#code-instruction").innerHTML = "<a href=event.php>Enter a different code.</a>";
-				processEventCode(eventCode.value);
+				//processEventCode(eventCode.value);
+				validateEvent(eventCode.value);
 			}
 		}
 
@@ -188,6 +190,27 @@
 
 		function sendRequest() {
 
+		}
+
+		function validateEvent(code) {
+			var request = new XMLHttpRequest();
+			request.addEventListener("readystatechange", function() {
+				if(request.readyState == XMLHttpRequest.DONE) {
+					if(request.status == 200) {
+						if(request.responseText == "false") {
+							createAlert("Event does not exist.", "red");
+						}
+						else if(request.responseText == "true") {
+							processEventCode(code);
+						}
+					}
+					else {
+						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+					}
+				}
+			});
+			request.open("GET", "api/validateEvent.php?event_code=" + code);
+			request.send();
 		}
 
 	</script>

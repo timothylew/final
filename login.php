@@ -82,7 +82,7 @@
 					if(request.status == 200) {
 						console.log(request.responseText);
 						if(request.responseText != "successful_query") {
-							createAlert("Login Error", "red");
+							createAlert(request.responseText, "red");
 						}
 						else {
 							window.location.replace("dashboard.php");
