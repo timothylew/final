@@ -125,7 +125,7 @@
 				createAlert("Code must be 5 characters long.", "red");
 			}
 			else {
-				createAlert("Code successfully created.", "green");
+				insertEvent(eventCode.value);
 			}
 		}
 
@@ -223,6 +223,27 @@
 			else if(type == "playlist"){
 				document.querySelector(".playlist-display").appendChild(container);
 			}
+		}
+
+		function insertEvent(code) {
+			var request = new XMLHttpRequest();
+			request.addEventListener("readystatechange", function() {
+				if(request.readyState == XMLHttpRequest.DONE) {
+					if(request.status == 200) {
+						if(request.responseText == "successful_query") {
+							createAlert("Code successfully created.", "green");
+						}
+						else {
+							createAlert(request.responseText, "red");
+						}
+					}
+					else {
+						createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+					}
+				}
+			});
+			request.open("GET", "api/createEvent.php?event_code=" + code);
+			request.send();
 		}
 	</script>
 
