@@ -26,6 +26,7 @@
 			exit();
 		}
 		$results2 = $mysqli->query($sql);
+		$results3 = $mysqli->query($sql);
 
 		// Close the connection.
 		$mysqli->close();
@@ -65,7 +66,7 @@
 					<div class="dashboard-manage-events">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Delete Event Code</p>
 						<select class="select-option event-delete">
-							<option value="">--Select a code--</option>
+							<option value="">Select code to delete.</option>
 							<?php while($row = $results2->fetch_assoc()) : ?>
 								<option value="<?php echo $row['event_code']; ?>">
 									<?php echo $row['event_code']; ?>
@@ -73,6 +74,28 @@
 							<?php endwhile; ?>
 						</select>
 						<button class="delete-code">Delete</button>
+					</div>
+
+					<div class="dashboard-manage-events">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Update Event Code</p>
+						<select class="select-option event-update">
+							<option value="">Select code to update.</option>
+							<?php while($row = $results3->fetch_assoc()) : ?>
+								<option value="<?php echo $row['event_code']; ?>">
+									<?php echo $row['event_code']; ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+
+						<form action="dashboard.php" method="POST">
+							<div>
+								<label for="update-event-input"" class="text-paragraph">Event Code:</label>
+								<div>
+									<input type="text" id="update-event-input" name="event" placeholder="New event code">
+								</div>
+							</div> 
+						</form>
+						<button class="update-code">Update</button>
 					</div>
 				</td>
 			
@@ -126,7 +149,7 @@
 		var refreshButton = document.querySelector(".request-refresh");
 		var requestIdArray = [];
 
-		refreshToken(); // Is this right?
+		refreshToken(); // TODO: Is this right?
 
 		eventCode.onkeydown = function(event) {
 			console.log(eventCode.value.length);
@@ -178,11 +201,8 @@
 
 		function refreshRequests(code) {
 			document.querySelector(".request-display").innerHTML = ""; // TODO fix this
-			//Test objects
 
 			if(code != "") {
-				// createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
-				// createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "request");
 				getEventRequests(code, refreshRequestsCallback);
 			}
 		}
@@ -321,6 +341,20 @@
 		document.querySelector(".delete-code").onclick = function() {
 			if(confirm("You are about to delete this event code and all of its requests.  This action cannot be undone.")) {
 				deleteEvent(document.querySelector(".event-delete").value);
+			}
+		}
+
+		document.querySelector(".update-code").onclick = function() {
+			var newCode = document.querySelector("#update-event-input").value; // This is the input field.
+			var oldCode = document.querySelector(".event-update").value; // This is the select.
+			if(newCode.trim() == "") {
+				createAlert("New code field cannot be empty.", "red");
+			}
+			else if(oldCode.trim() == "") {
+				createAlert("Please select a code to update.", "red");
+			}
+			else {
+				updateEvent(oldCode, newCode);
 			}
 		}
 

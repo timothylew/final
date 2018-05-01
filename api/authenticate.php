@@ -49,8 +49,4 @@
 	// Close the connection.
 	$mysqli->close();
 	echo "successful_query";
-
-
-
-
 ?>

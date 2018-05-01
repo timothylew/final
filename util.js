@@ -139,3 +139,19 @@ function deleteEvent(event_code) {
 	request.open("GET", "api/deleteEvent.php?event_code=" + event_code);
 	request.send();
 }
+
+function updateEvent(old_event_code, new_event_code) {
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(old_event_code + " changed to " + new_event_code);
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/updateEvent.php?old_event_code=" + old_event_code + "&new_event_code=" + new_event_code);
+	request.send();
+}
