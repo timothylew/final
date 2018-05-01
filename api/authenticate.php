@@ -40,7 +40,7 @@
 
 	$row = $results->fetch_assoc();
 	if($row['password_hash'] != hash('sha256', $_POST['password'])) {
-		echo "Incorrect password." . $row['password_hash'] . "/////" . hash('sha256', $_POST['password']);
+		echo "Incorrect password.";
 		exit();
 	} else {
 		$_SESSION['current_user'] = $row['user_id'];

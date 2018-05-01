@@ -64,19 +64,6 @@
 					</div>
 
 					<div class="dashboard-manage-events">
-						<p style="font-size: 20px; padding-top: 20px; color: black;">Delete Event Code</p>
-						<select class="select-option event-delete">
-							<option value="">Select code to delete.</option>
-							<?php while($row = $results2->fetch_assoc()) : ?>
-								<option value="<?php echo $row['event_code']; ?>">
-									<?php echo $row['event_code']; ?>
-								</option>
-							<?php endwhile; ?>
-						</select>
-						<button class="delete-code">Delete</button>
-					</div>
-
-					<div class="dashboard-manage-events">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Update Event Code</p>
 						<select class="select-option event-update">
 							<option value="">Select code to update.</option>
@@ -97,6 +84,20 @@
 						</form>
 						<button class="update-code">Update</button>
 					</div>
+
+					<div class="dashboard-manage-events">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Delete Event Code</p>
+						<select class="select-option event-delete">
+							<option value="">Select code to delete.</option>
+							<?php while($row = $results2->fetch_assoc()) : ?>
+								<option value="<?php echo $row['event_code']; ?>">
+									<?php echo $row['event_code']; ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+						<button class="delete-code">Delete</button>
+					</div>
+
 				</td>
 			
 
@@ -171,6 +172,7 @@
 			else {
 				insertEvent(eventCode.value, updateDropdowns);
 			}
+			eventCode.value = "";
 		}
 
 		eventSelect.onchange = function() {
@@ -323,7 +325,7 @@
 				if(request.readyState == XMLHttpRequest.DONE) {
 					if(request.status == 200) {
 						if(request.responseText == "successful_query") {
-							createAlert("Code successfully created.", "green");
+							createAlert("Code (" + code + ") successfully created.", "green");
 							callback();
 						}
 						else {
@@ -360,6 +362,7 @@
 			else {
 				updateEvent(oldCode, newCode, updateDropdowns);
 			}
+			document.querySelector("#update-event-input").value = "";
 		}
 
 		function updateDropdowns() {

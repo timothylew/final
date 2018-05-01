@@ -121,6 +121,10 @@
 				createAlert("Username must not be empty.", red);
 				// Switch class here.
 			}
+			if(email.value.trim().length == 0) {
+				validRegistration = false;
+				createAlert("Email must not be empty.", red)
+			}
 			if(password.value.trim().length == 0) {
 				validRegistration = false;
 				createAlert("Password must not be empty.", red);
