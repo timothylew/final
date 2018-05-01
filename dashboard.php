@@ -169,7 +169,7 @@
 				createAlert("Code must be 5 characters long.", "red");
 			}
 			else {
-				insertEvent(eventCode.value);
+				insertEvent(eventCode.value, updateDropdowns);
 			}
 		}
 
@@ -317,13 +317,14 @@
 			}
 		}
 
-		function insertEvent(code) {
+		function insertEvent(code, callback) {
 			var request = new XMLHttpRequest();
 			request.addEventListener("readystatechange", function() {
 				if(request.readyState == XMLHttpRequest.DONE) {
 					if(request.status == 200) {
 						if(request.responseText == "successful_query") {
 							createAlert("Code successfully created.", "green");
+							callback();
 						}
 						else {
 							createAlert(request.responseText, "red");
@@ -339,8 +340,11 @@
 		}
 
 		document.querySelector(".delete-code").onclick = function() {
-			if(confirm("You are about to delete this event code and all of its requests.  This action cannot be undone.")) {
-				deleteEvent(document.querySelector(".event-delete").value);
+			if(document.querySelector(".event-delete").value == "") {
+				createAlert("Select a code to delete.", "red");
+			}
+			else if(confirm("You are about to delete this event code and all of its requests.  This action cannot be undone.")) {
+				deleteEvent(document.querySelector(".event-delete").value, updateDropdowns);
 			}
 		}
 
@@ -354,7 +358,41 @@
 				createAlert("Please select a code to update.", "red");
 			}
 			else {
-				updateEvent(oldCode, newCode);
+				updateEvent(oldCode, newCode, updateDropdowns);
+			}
+		}
+
+		function updateDropdowns() {
+			getEvents(updateDropdownCallback);
+		}
+
+		function updateDropdownCallback(results) {
+			console.log(results);
+			var selectObjects = document.querySelectorAll("select");
+			for(var i = 0; i < selectObjects.length; i++) {
+				var currentItem = selectObjects[i];
+				while(currentItem.hasChildNodes()) { 
+					currentItem.removeChild(currentItem.firstChild);
+				}
+				var defaultOption = document.createElement("option");
+			
+				if(currentItem.classList.contains("event-delete")) {
+					defaultOption.innerHTML = "Select code to delete.";
+				}
+				else if(currentItem.classList.contains("event-update")) {
+					defaultOption.innerHTML = "Select code to update.";
+				}
+				else {
+					defaultOption.innerHTML = "--Select event code--";
+				}
+				currentItem.appendChild(defaultOption);
+
+				for(var j = 0; j < results.length; j++) {
+					var option = document.createElement("option");
+					option.innerHTML = results[j].event_code;
+					option.value = results[j].event_code;
+					currentItem.appendChild(option);
+				}
 			}
 		}
 

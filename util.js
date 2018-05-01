@@ -124,12 +124,19 @@ function deleteRequest(request_id) {
 	request.send();
 }
 
-function deleteEvent(event_code) {
+function deleteEvent(event_code, callback) {
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				console.log(event_code + " deleted.")
+				console.log(event_code + " deleted.");
+				if(request.responseText == "successful_query") {
+					createAlert(event_code + " successfully deleted.", "green")
+					callback();
+				}
+				else {
+					createAlert(request.responseText, "red");
+				}
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
@@ -140,12 +147,13 @@ function deleteEvent(event_code) {
 	request.send();
 }
 
-function updateEvent(old_event_code, new_event_code) {
+function updateEvent(old_event_code, new_event_code, callback) {
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				console.log(old_event_code + " changed to " + new_event_code);
+				callback();
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
@@ -153,5 +161,22 @@ function updateEvent(old_event_code, new_event_code) {
 		}
 	});
 	request.open("GET", "api/updateEvent.php?old_event_code=" + old_event_code + "&new_event_code=" + new_event_code);
+	request.send();
+}
+
+function getEvents(callback) {
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				//console.log(request.responseText);
+				callback(JSON.parse(request.responseText));
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/getEvents.php");
 	request.send();
 }
