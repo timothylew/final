@@ -107,3 +107,35 @@ function getEventRequests(eventCode, callback) {
 	request.open("GET", "api/getEventRequests.php?event_code=" + eventCode);
 	request.send();
 }
+
+function deleteRequest(request_id) {
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(request_id + " deleted.")
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/deleteRequest.php?request_id=" + request_id);
+	request.send();
+}
+
+function deleteEvent(event_code) {
+	var request = new XMLHttpRequest();
+	request.addEventListener("readystatechange", function() {
+		if(request.readyState == XMLHttpRequest.DONE) {
+			if(request.status == 200) {
+				console.log(event_code + " deleted.")
+			}
+			else {
+				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
+			}
+		}
+	});
+	request.open("GET", "api/deleteEvent.php?event_code=" + event_code);
+	request.send();
+}

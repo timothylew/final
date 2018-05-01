@@ -25,6 +25,7 @@
 			echo $mysqli->error;
 			exit();
 		}
+		$results2 = $mysqli->query($sql);
 
 		// Close the connection.
 		$mysqli->close();
@@ -59,30 +60,19 @@
 							</div> 
 						</form>
 						<button class="create-code">Submit</button>
-						<!-- <table class="manage-event">
-							<tr>
-								<td><h2>Create an event code:</h2></td>
-								<td class="input-cell">
-									<form action="dashboard.php" method="POST">
-									<div>
-										<label for="event-id" class="text-paragraph">Event Code:</label>
-										<div>
-											<input type="text" id="event-id" name="event" placeholder="Event Code">
-										</div>
-									</div> 
-									</form>
-								</td>
-							</tr>
-							<tr>
-								<td><h2>Select an existing code:</h2></td>
-								<td class="input-cell">
-									<select class="select-option event-select">
-										<option value="">No available events.</option>
-									</select>
-								</td>
-							</tr>
-						</table> -->
-					
+					</div>
+
+					<div class="dashboard-manage-events">
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Delete Event Code</p>
+						<select class="select-option event-delete">
+							<option value="">--Select a code--</option>
+							<?php while($row = $results2->fetch_assoc()) : ?>
+								<option value="<?php echo $row['event_code']; ?>">
+									<?php echo $row['event_code']; ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+						<button class="delete-code">Delete</button>
 					</div>
 				</td>
 			
@@ -92,16 +82,6 @@
 				<td class="dashboard-right">
 					<div class="dashboard-manage-requests">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Manage Requests</p>
-						<!-- <table style="width: 70%;">
-							<tr>
-								<td><p>Select an event code:</p></td>
-								<td class="input-cell">
-									<select class="select-option event-select">
-										<option value="">No available events.</option>
-									</select>
-								</td>
-							</tr>
-						</table> -->
 						<div>
 							<select class="select-option event-select">
 								<option value="">--Select event code--</option>
@@ -144,6 +124,9 @@
 		var playlistSelect = document.querySelector(".playlist-select");
 		var playlistDiv = document.querySelector(".playlist-display");
 		var refreshButton = document.querySelector(".request-refresh");
+		var requestIdArray = [];
+
+		refreshToken(); // Is this right?
 
 		eventCode.onkeydown = function(event) {
 			console.log(eventCode.value.length);
@@ -206,6 +189,7 @@
 
 		function refreshRequestsCallback(results) {
 			console.log(results);
+			requestIdArray = [];
 			//TODO implement logic to split into sets of 50 later...
 			if(results.length > 0) {
 				var spotifyQuery = "";
@@ -214,6 +198,7 @@
 					if(i != results.length - 1) {
 						spotifyQuery += ",";
 					}
+					requestIdArray.push(results[i]['request_id']);
 				}
 
 				console.log(spotifyQuery);
@@ -242,11 +227,11 @@
 						artistString += ", ";
 					}
 				}
-				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, "request");
+				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, "request", i);
 			}
 		}
 
-		function createEventElement(song, artist, album, imageURL, type) {
+		function createEventElement(song, artist, album, imageURL, type, request_id) {
 			// for each result, we must call this function
 			// for each result, we must call this function
 			var container = document.createElement("div");
@@ -279,7 +264,10 @@
 			image.classList.add("list-item");
 
 			dismiss.onclick = function() {
-				container.classList.add("remove-item");
+				if(confirm("You are about to delete this request.  This action cannot be undone.")) {
+					container.classList.add("remove-item");
+					deleteRequest(requestIdArray[request_id]);
+				}
 			}
 
 			column1.appendChild(image);
@@ -328,6 +316,12 @@
 			});
 			request.open("GET", "api/createEvent.php?event_code=" + code);
 			request.send();
+		}
+
+		document.querySelector(".delete-code").onclick = function() {
+			if(confirm("You are about to delete this event code and all of its requests.  This action cannot be undone.")) {
+				deleteEvent(document.querySelector(".event-delete").value);
+			}
 		}
 
 
