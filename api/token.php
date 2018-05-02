@@ -23,7 +23,6 @@
 	curl_setopt_array($curl, array(
 		CURLOPT_URL 			=> 	'https://accounts.spotify.com/api/token',
 		CURLOPT_HTTPHEADER 		=> 	$header,
-		//CURLOPT_SSL_VERIFYPEER 	=> 	false, // why?
 		CURLOPT_RETURNTRANSFER 	=> 	true,
 		CURLOPT_POST 			=> 	true,
 		CURLOPT_POSTFIELDS		=> 	http_build_query($request_parameters)

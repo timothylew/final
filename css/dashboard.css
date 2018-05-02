@@ -77,8 +77,6 @@
 }
 
 .dashboard-manage-playlists {
-	/*border: 1px solid green;*/
-	/*float: left;*/
 	width: 100%;
 	text-align: center;
 	background-color: #81D8D0;
@@ -95,7 +93,6 @@
 
 .dashboard-manage-requests {
 	text-align: center;
-	/*float:right;*/
 	width: 100%;
 	background-color: #F08080;
 	border-radius: 20px;

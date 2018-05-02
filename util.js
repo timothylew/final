@@ -169,7 +169,6 @@ function getEvents(callback) {
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				//console.log(request.responseText);
 				callback(JSON.parse(request.responseText));
 			}
 			else {

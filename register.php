@@ -5,20 +5,6 @@
 		$_SESSION['account_created'] = "set";
 		$password_hash = hash('sha256', $_POST['password']);
 
-		// $email = $_POST['email'];
-		// $subject = "Welcome to lucidity.";
-		// $msg = "Thank you for making your lucidity account.";
-		// $headers = "From: noreply@timothylew.com"
-		// 		  . "\r\n"
-		// 		  . "Content-Type: text/html";
-
-		// if(mail($email, $subject, $msg, $headers)) {
-		// 	echo '<script>console.log("Confirmation email sent.");</script>';
-		// }
-		// else {
-		// 	echo '<script>console.log("Confirmation email failed to send.");</script>';
-		// }
-
 		header("Location: login.php");
 	}
 	else if(isset($_SESSION['registration_submit']) && !empty($_SESSION['registration_submit'])) {

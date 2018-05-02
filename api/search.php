@@ -21,7 +21,6 @@
 	curl_setopt_array($curl, array(
 		CURLOPT_URL 			=> 	'https://api.spotify.com/v1/search?q=' . $query . '&type=track',
 		CURLOPT_HTTPHEADER 		=> 	$header,
-		//CURLOPT_SSL_VERIFYPEER 	=> 	false, // why?
 		CURLOPT_RETURNTRANSFER 	=> 	true,
 		CURLOPT_POST 			=> 	false,
 	));
