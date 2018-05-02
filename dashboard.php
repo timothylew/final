@@ -137,6 +137,7 @@
 	<script type="text/javascript" src="util.js"></script>
 	<script type="text/javascript">
 		var eventCode = document.querySelector("#event-id");
+		var updateEventCode = document.querySelector("#update-event-input");
 		var createEvent = document.querySelector(".create-code");
 		var eventSelect = document.querySelector(".event-select");
 		var playlistSelect = document.querySelector(".playlist-select");
@@ -149,6 +150,14 @@
 		eventCode.onkeydown = function(event) {
 			console.log(eventCode.value.length);
 			if(eventCode.value.length >= 5 && (event.keyCode != 8 && event.keyCode != 46)) {
+				// Prevent the user from typing in more than 5 characters.
+				return false;
+			}
+		}
+
+		updateEventCode.onkeydown = function(event) {
+			console.log(updateEventCode.value.length);
+			if(updateEventCode.value.length >= 5 && (event.keyCode != 8 && event.keyCode != 46)) {
 				// Prevent the user from typing in more than 5 characters.
 				return false;
 			}
@@ -366,7 +375,10 @@
 			if(newCode.trim() == "") {
 				createAlert("New code field cannot be empty.", "red");
 			}
-			else if(oldCode.trim() == "") {
+			else if (newCode.trim().length != 5) {
+				createAlert("Code must be 5 characters.", "red");
+			}
+			else if(oldCode.trim() == "" || oldCode.trim() == undefined) {
 				createAlert("Please select a code to update.", "red");
 			}
 			else {

@@ -158,6 +158,7 @@ function updateEvent(old_event_code, new_event_code, callback) {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				console.log(old_event_code + " changed to " + new_event_code);
+				createAlert("Event successfully updated.", "green");
 				callback();
 			}
 			else {
