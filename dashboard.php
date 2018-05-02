@@ -117,15 +117,9 @@
 						</div>
 						<div class="request-display">No requests loaded.</div>
 					</div>
+
 					<div class="dashboard-manage-playlists">
-						<p style="font-size: 20px; padding-top: 20px; color: black;">Playlists</p>
-
-						<select class="select-option playlist-select">
-							<option value="">--Select a playlist--</option>
-							<option value="test"> Test item </option>
-						</select>
-
-						<div class="playlist-display">No playlist loaded.</div>
+						<p style="font-size: 20px; padding-top: 20px; color: black;">Support</p>
 					</div>
 				</td>
 			</tr>
@@ -140,8 +134,6 @@
 		var updateEventCode = document.querySelector("#update-event-input");
 		var createEvent = document.querySelector(".create-code");
 		var eventSelect = document.querySelector(".event-select");
-		var playlistSelect = document.querySelector(".playlist-select");
-		var playlistDiv = document.querySelector(".playlist-display");
 		var refreshButton = document.querySelector(".request-refresh");
 		var requestIdArray = [];
 
@@ -183,25 +175,8 @@
 			refreshRequests(eventSelect.value);
 		}
 
-		playlistSelect.onchange = function() {
-			console.log(playlistSelect.value);
-			if(playlistSelect.value.length == 0) {
-				playlistDiv.innerHTML = "No playlist selected.";
-			}
-			else {
-				playlistDiv.innerHTML = "";
-				loadPlaylist(playlistSelect.value);
-			}
-		}
-
 		refreshButton.onclick = function() {
 			refreshRequests(eventSelect.value);
-		}
-
-		function loadPlaylist(playlist) {
-			//Logic to load playlist. For now we have a test object.
-			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "playlist");
-			createEventElement("Test Object", "Test Artist", "Test Album", "https://i.scdn.co/image/f2798ddab0c7b76dc2d270b65c4f67ddef7f6718", "playlist");
 		}
 
 		function refreshRequests(code) {
@@ -361,7 +336,8 @@
 		}
 
 		document.querySelector(".delete-code").onclick = function() {
-			if(document.querySelector(".event-delete").value == "") {
+			var deleteSelectedItem = document.querySelector(".event-delete").value;
+			if(deleteSelectedItem == "" || deleteSelectedItem == undefined) {
 				createAlert("Select a code to delete.", "red");
 			}
 			else if(confirm("You are about to delete this event code and all of its requests.  This action cannot be undone.")) {

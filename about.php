@@ -31,17 +31,19 @@
 
 		<p>There are two intended audiences for this application.  One audience is DJs/Live Musicians who want an easier way to communicate with eventgoers and plan setlists of music.  The other intended audience is eventgoers who would like to provide input on the music selection at a particular event.</p>
 
+		<p>Full CRUD functionality is provided for host users.  They will be able to create, update, and delete event codes.  Retrieval of event codes is also used to prepopulate and dynamically update all dropdowns on the host dashboard ("manage" button).</p>
+
 		<h3>2. Instructions for Demo:</h3>
 		<ul>
 			<li>Homepage: Simply click on the logo in the nav bar on any page to go here.  This displays simple information about the service.</li>
 			<br>
-			<li>Login Page: Simply click on the login button in the nav bar.  The login page is currently not hooked up to any database, so any <em>non-empty</em> inputs will work.  You must login to view the dashboard.</li>
+			<li>Login Page: Simply click on the login button in the nav bar.  If you do not have an account, click the Sign Up button under the input fields and fill out the registration form.  You must login to view the host/event management dashboard.</li>
 			<br> 
-			<li>Register Page: Simply click on the sign up link on the login page.</li>
+			<li>Register Page: Simply click on the sign up link on the login page to get here.  Fill out all fields (all required) to create your account.  The notification toasts in the top right corner of the screen will let you know about any errors that may arise.</li>
 			<br>
 			<li>Request Page: Click on the "Request Song" button on the nav bar.  On this page, enter any 5 character code as your event code.  Upon completion of this, a search bar will appear.  Search any song using this input field, and the results will populate underneath.  You may request songs from the results using the Request button that will appear.</li>
 			<br>
-			<li>Manage Page: Login to the system and click on Manage in the nav bar.  This page will allow you to manage events and requests.  Right now, hard coded values will populate when you click on the "Refresh" buttons or if you select an item from the selects.</li>
+			<li>Manage Page (Dashboard): Login to the system and click on Manage in the nav bar.  This page will allow you to manage events and requests.  Right now, hard coded values will populate when you click on the "Refresh" buttons or if you select an item from the selects.</li>
 		</ul>
 
 		<h3>3. Database:</h3>
