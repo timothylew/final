@@ -66,7 +66,7 @@
 					<div class="dashboard-manage-events">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Update Event Code</p>
 						<select class="select-option event-update">
-							<option value="">Select code to update.</option>
+							<option value="">Pick code to update.</option>
 							<?php while($row = $results3->fetch_assoc()) : ?>
 								<option value="<?php echo $row['event_code']; ?>">
 									<?php echo $row['event_code']; ?>
@@ -88,7 +88,7 @@
 					<div class="dashboard-manage-events">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Delete Event Code</p>
 						<select class="select-option event-delete">
-							<option value="">Select code to delete.</option>
+							<option value="">Pick code to delete.</option>
 							<?php while($row = $results2->fetch_assoc()) : ?>
 								<option value="<?php echo $row['event_code']; ?>">
 									<?php echo $row['event_code']; ?>
@@ -97,11 +97,7 @@
 						</select>
 						<button class="delete-code">Delete</button>
 					</div>
-
 				</td>
-			
-
-			<!-- <div class="dashboard_container"> -->
 
 				<td class="dashboard-right">
 					<div class="dashboard-manage-requests">
@@ -128,8 +124,6 @@
 							<option value="">--Select a playlist--</option>
 							<option value="test"> Test item </option>
 						</select>
-
-						<!-- <button class="create-playlist">Create new playlist</button> -->
 
 						<div class="playlist-display">No playlist loaded.</div>
 					</div>
@@ -214,17 +208,32 @@
 			requestIdArray = [];
 			//TODO implement logic to split into sets of 50 later...
 			if(results.length > 0) {
-				var spotifyQuery = "";
-				for(var i = 0; i < results.length; i++) {
-					spotifyQuery += results[i]['song_id'];
-					if(i != results.length - 1) {
-						spotifyQuery += ",";
+				var lengthAdjustment = 0;
+				for(var j = 0; j < (Math.floor((results.length/50) + 1)); j++) {
+					var iterateLength = 50;
+					if(j == Math.floor(results.length / 50)) {
+						iterateLength = results.length % 50; 
 					}
-					requestIdArray.push(results[i]['request_id']);
+					console.log("Iterate length: " + iterateLength);
+					var spotifyQuery = "";
+					if(iterateLength > 0) {
+						for(var i = 0; i < iterateLength; i++) {
+							console.log(i + lengthAdjustment);
+							console.log(results[i + lengthAdjustment]['song_id']);
+							spotifyQuery += results[i + lengthAdjustment]['song_id'];
+							if(i != iterateLength - 1) {
+								spotifyQuery += ",";
+							}
+							requestIdArray.push(results[i + lengthAdjustment]['request_id']);
+						}
+						console.log(spotifyQuery);
+						console.log(requestIdArray);
+						retrieveSeveralTracks(spotifyQuery, retrieveTracksCallback, lengthAdjustment);
+						if(iterateLength == 50) {
+							lengthAdjustment += iterateLength;
+						}
+					}
 				}
-
-				console.log(spotifyQuery);
-				retrieveSeveralTracks(spotifyQuery, retrieveTracksCallback);
 			}
 			else {
 				var noResults = document.createElement("p");
@@ -233,7 +242,7 @@
 			}
 		}
 
-		function retrieveTracksCallback(results) {
+		function retrieveTracksCallback(results, lengthAdjustment) {
 			console.log(results);
 			var resultsArray = results.tracks;
 			if(resultsArray.length <= 0) {
@@ -249,7 +258,8 @@
 						artistString += ", ";
 					}
 				}
-				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, "request", i);
+				console.log("Num " + (parseFloat(i) + parseFloat(lengthAdjustment)));
+				createEventElement(resultsArray[i].name, artistString, resultsArray[i].album.name, resultsArray[i].album.images[0].url, "request", (parseFloat(i) + parseFloat(lengthAdjustment)));
 			}
 		}
 
@@ -380,10 +390,10 @@
 				var defaultOption = document.createElement("option");
 			
 				if(currentItem.classList.contains("event-delete")) {
-					defaultOption.innerHTML = "Select code to delete.";
+					defaultOption.innerHTML = "Pick code to delete.";
 				}
 				else if(currentItem.classList.contains("event-update")) {
-					defaultOption.innerHTML = "Select code to update.";
+					defaultOption.innerHTML = "Pick code to update.";
 				}
 				else {
 					defaultOption.innerHTML = "--Select event code--";

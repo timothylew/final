@@ -60,8 +60,13 @@ function lookupTrack(query, code, callback) {
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				//console.log(request.responseText);
-				callback(JSON.parse(request.responseText), code);
+				console.log(request.responseText);
+				if(request.responseText == "response_error") {
+					createAlert("Search response error.  Please try refreshing.", "red");
+				} 
+				else {
+					callback(JSON.parse(request.responseText), code);
+				}
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");
@@ -72,15 +77,15 @@ function lookupTrack(query, code, callback) {
 	request.send();
 }
 
-function retrieveSeveralTracks(idList, callback) {
+function retrieveSeveralTracks(idList, callback, lengthAdjustment) {
 	//refreshToken(); TODO need to figure out token authenticity somehow
 	var spotifyQuery = "?ids=" + idList;
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
-				//console.log(request.responseText);
-				callback(JSON.parse(request.responseText));
+				console.log(request.responseText);
+				callback(JSON.parse(request.responseText), lengthAdjustment);
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");

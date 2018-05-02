@@ -106,7 +106,7 @@
 	color: white;
 }
 
-#event-id {
+#event-id, #update-event-input{
 	width: 100px;
 	text-align: center
 }
@@ -158,7 +158,7 @@ button {
 	button {
 		width: 180px;
 	}
-	#event-id {
+	#event-id, #update-event-input {
 		width: 180px;
 	}
 
