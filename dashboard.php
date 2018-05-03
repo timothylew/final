@@ -118,9 +118,10 @@
 						<div class="request-display">No requests loaded.</div>
 					</div>
 
-					<div class="dashboard-manage-playlists">
+					<div class="dashboard-support">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Support</p>
-						<p style="color: black;">Please feel free to contact us if you need help with anything!</p>
+						<p class="support-paragraph">Please feel free to contact us at lucidity@timothylew.com if you need anything! We will get back in touch with you as soon as possible.  If you experience any response errors or API errors during your time here, we recommend refreshing the page in case your access token has expired. The Lucidity team will also be notified immediately so we can further assist you.</p>
+						<p class="support-paragraph">Graders: The <a href="about.php">about page</a> contains instructions and documentation on this project.</p>
 					</div>
 				</td>
 			</tr>
