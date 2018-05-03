@@ -31,7 +31,7 @@
 
 		<p>There are two intended audiences for this application.  One audience is DJs/Live Musicians who want an easier way to communicate with eventgoers and plan setlists of music.  The other intended audience is eventgoers who would like to provide input on the music selection at a particular event.</p>
 
-		<p>Full CRUD functionality is provided for host users.  They will be able to create, update, and delete event codes.  Retrieval of event codes is also used to prepopulate and dynamically update all dropdowns on the host dashboard ("manage" button).</p>
+		<p>Full CRUD functionality is provided for host users.  They will be able to create, update, and delete event codes.  Retrieval of event codes is also used to prepopulate and dynamically update all dropdowns on the host dashboard ("manage" button).  Eventgoer users will be able to enter an event code and submit song requests for that event.</p>
 
 		<h3>2. Instructions for Demo:</h3>
 		<ul>
