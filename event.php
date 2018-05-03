@@ -64,9 +64,7 @@
 			searchButton.innerHTML = "Search";
 			searchDiv.appendChild(searchButton);
 			document.querySelector("#search-area").appendChild(searchDiv);
-			// searchField.oninput = function() {
-			// 	loadEventResults(searchField.value);
-			// }
+			
 			searchButton.onclick = function() {
 				loadEventResults(searchField.value, code);
 			}
@@ -94,7 +92,6 @@
 				createAlert("Search field cannot be empty.", "red");
 			}
 			else {
-				//refreshToken(); // Do this?
 				var loadingIcon = document.createElement("img");
 				loadingIcon.src = "img/loadIcon.gif";
 				loadingIcon.classList.add("load-icon");

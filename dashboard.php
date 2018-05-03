@@ -182,7 +182,7 @@
 		}
 
 		function refreshRequests(code) {
-			document.querySelector(".request-display").innerHTML = ""; // TODO fix this
+			document.querySelector(".request-display").innerHTML = ""; 
 
 			if(code != "") {
 				getEventRequests(code, refreshRequestsCallback);

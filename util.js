@@ -78,7 +78,6 @@ function lookupTrack(query, code, callback) {
 }
 
 function retrieveSeveralTracks(idList, callback, lengthAdjustment) {
-	//refreshToken(); TODO need to figure out token authenticity somehow
 	var spotifyQuery = "?ids=" + idList;
 	var request = new XMLHttpRequest();
 	request.addEventListener("readystatechange", function() {

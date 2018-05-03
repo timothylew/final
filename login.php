@@ -66,8 +66,6 @@
 				createAlert("Password must not be empty.", "red");
 			}
 
-			// TODO verify login
-
 			if(validLogin) {
 				authenticateUser(username, password);
 			}
