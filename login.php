@@ -83,7 +83,7 @@
 							createAlert(request.responseText, "red");
 						}
 						else {
-							window.location.replace("dashboard.php");
+							window.location.href="dashboard.php";
 						}
 					}
 					else {

@@ -137,7 +137,7 @@
 							createAlert("Registration error.", "red");
 						}
 						else {
-							window.location.replace("login.php");
+							window.location.href="login.php";
 						}
 					}
 					else {
