@@ -14,6 +14,11 @@
 
 	session_start();
 
+	if(!isset($_SESSION['token']) || empty($_SESSION['token'])) {
+		echo "response_error";
+		exit();
+	}
+
 	$curl = curl_init();
 
 	$header = array('Authorization: Bearer ' . $_SESSION['token']);

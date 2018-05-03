@@ -68,6 +68,7 @@
 			<li>Frontend to Backend AJAX (Javascript to PHP) - All database queries and API functionality are stored in the api folder, which is accessed by the frontend through AJAX calls.</li>
 			<br>
 			<li>PHP Mail Function with HTML-Formatted Email - All API functions have an email function that notifies me if anything goes wrong (ie. error response from API call).</li>
+			<img src="img/mail.png" alt="Mail screenshot." style="width:100%; padding-top: 15px;">
 		</ul>
 	
 	</div>

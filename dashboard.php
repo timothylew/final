@@ -120,6 +120,7 @@
 
 					<div class="dashboard-manage-playlists">
 						<p style="font-size: 20px; padding-top: 20px; color: black;">Support</p>
+						<p style="color: black;">Please feel free to contact us if you need help with anything!</p>
 					</div>
 				</td>
 			</tr>

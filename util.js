@@ -85,7 +85,12 @@ function retrieveSeveralTracks(idList, callback, lengthAdjustment) {
 		if(request.readyState == XMLHttpRequest.DONE) {
 			if(request.status == 200) {
 				console.log(request.responseText);
-				callback(JSON.parse(request.responseText), lengthAdjustment);
+				if(request.responseText == "response_error") {
+					createAlert("Response error.  Please try refreshing.", "red");
+				} 
+				else {
+					callback(JSON.parse(request.responseText), lengthAdjustment);
+				}
 			}
 			else {
 				createAlert("AJAX Error " + request.status + ": " + request.statusText, "red");

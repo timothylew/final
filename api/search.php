@@ -12,6 +12,11 @@
 
 	session_start();
 
+	if(!isset($_SESSION['token']) || empty($_SESSION['token'])) {
+		echo "response_error";
+		exit();
+	}
+
 	$curl = curl_init();
 
 	$query = str_replace(" ", "+", $_GET['q']);
