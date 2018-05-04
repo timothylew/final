@@ -61,11 +61,11 @@
 		<p><em>If you would like to use and play around with an already existing account, try username: "test", password: "test".</em></p>
 
 		<h3>3. Database:</h3>
-		<p>The database will store a user's id, login username, and hashed password in one table (the "users" table).  This data will come from a "host" user who registers for the service. </p>
+		<p>The database will store a user's id, login username, email, and hashed password in one table (the "users" table).  This data will come from a "host" user who registers for the service through the registration page. </p>
 
-		<p>There will also be a table in the database ("playlists") that store a playlist name, id, owner id, and a comma separated string of Spotify IDs for songs in the playlist. The "host" user will be able to create playlists by searching for songs through Spotify's API, which will return a list of Spotify song IDs.  The owner id will correspond to the "host" that created the playlist, and that "host" will also supply the playlist name.  </p>
+		<p>There will also be a table in the database ("events") that stores event codes that have been created, and the user id of the user that created each event code.  This data is populated when a host user creates an event code from the dashboard.  These event codes can also be updated and deleted by the owner of the event code.</p>
 
-		<p>There will be one last table ("suggestions") that will store an id, owner id, and a comma separated string of Spotify IDs for songs to be requested.  The "eventgoer" user will search for a song to request through Spotify's search API, which returns a Spotify ID.  This Spotify ID will be appended to whatever is already in the comma separated string.</p>
+		<p>There will be one last table ("requests") that will store a request id, event code, song id (given by Spotify Web API), and frequency.  The "eventgoer" user will search for a song to request (on the request/event page) through Spotify's search API, which returns a Spotify ID for each song.  This Spotify ID will be put in the database alongside the event code that the "eventgoer" user provided.  The request id is a unique identifier for each request (auto increment).  If a request in the database matches a request being made (same event code and same song id), the frequency of the existing record will be incremented instead of the addition of an additional record.</p>
 
 		<h3>4. Database Diagram:</h3>
 		<p>A diagram of my database can be found below:</p>
@@ -73,15 +73,15 @@
 
 		<h3>5. Extras Used:</h3>
 		<ul>
-			<li><a href="https://developer.spotify.com/web-api/" target="_blank">Spotify Web API</a> - Used the Spotify Web API for the search functionality on the request page.  The endpoints used were the client credentials authentication flow, the search function, and the search using multiple IDs function.</li>
+			<li><a href="https://developer.spotify.com/web-api/" target="_blank">Spotify Web API</a> - Used the Spotify Web API for the search functionality on the request page.  This API is also what allows us to render songs under the manage page for the host users.  The endpoints used were the client credentials authentication flow, the search function, and the search using multiple IDs function.</li>
 			<br>
 			<li><a href="https://developers.google.com/fonts/" target="_blank">Google Fonts</a> - Used to load in the font for all web pages.</li>
 			<br>
-			<li>Sessions - Used to store data about the current user, and also used to manage the login flow for the site.</li>
+			<li>Sessions/Cookies - Used to store data about the current user, and also used to manage the login flow for the site.  This usage of sessions and cookies allows us to have different user permission levels as well.</li>
 			<br>
-			<li>Frontend to Backend AJAX (Javascript to PHP) - All database queries and API functionality are stored in the api folder, which is accessed by the frontend through AJAX calls.</li>
+			<li>Frontend to Backend AJAX (Javascript to PHP) - All database queries and API functionality are stored in pure PHP files in the api folder of my project, which is accessed by the frontend through AJAX calls.</li>
 			<br>
-			<li>PHP Mail Function with HTML-Formatted Email - All API functions have an email function that notifies me if anything goes wrong (ie. error response from API call).</li>
+			<li>PHP Mail Function with HTML-Formatted Email - Some of the key API functions have an email function that notifies me if anything goes wrong (ie. error response from API call).  This helps me debug and solve issues that may arise with the system.</li>
 			<img src="img/mail.png" alt="Mail screenshot." style="width:100%; padding-top: 15px;">
 		</ul>
 

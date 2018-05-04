@@ -60,7 +60,9 @@
 								</div>
 							</div> 
 						</form>
-						<button class="create-code">Submit</button>
+						<div>
+							<button class="create-code">Submit</button>
+						</div>
 					</div>
 
 					<div class="dashboard-manage-events">
@@ -82,7 +84,9 @@
 								</div>
 							</div> 
 						</form>
-						<button class="update-code">Update</button>
+						<div>
+							<button class="update-code">Update</button>
+						</div>
 					</div>
 
 					<div class="dashboard-manage-events">
@@ -95,7 +99,9 @@
 								</option>
 							<?php endwhile; ?>
 						</select>
-						<button class="delete-code">Delete</button>
+						<div>
+							<button class="delete-code">Delete</button>
+						</div>
 					</div>
 				</td>
 
