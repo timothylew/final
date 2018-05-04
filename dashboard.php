@@ -141,6 +141,13 @@
 
 		refreshToken(); // TODO: Is this right?
 
+		function clearErrors() {
+			var errorDiv = document.querySelector(".error");
+			while(errorDiv.hasChildNodes()) {
+				errorDiv.removeChild(errorDiv.firstChild);
+			}
+		}
+
 		eventCode.onkeydown = function(event) {
 			console.log(eventCode.value.length);
 			if(eventCode.value.length >= 5 && (event.keyCode != 8 && event.keyCode != 46)) {
@@ -158,10 +165,7 @@
 		}
 
 		createEvent.onclick = function() {
-			var errorDiv = document.querySelector(".error");
-			while(errorDiv.hasChildNodes()) {
-				errorDiv.removeChild(errorDiv.firstChild);
-			}
+			clearErrors();
 			console.log(eventCode.value);
 			if(eventCode.value.length < 5) {
 				createAlert("Code must be 5 characters long.", "red");
@@ -174,18 +178,27 @@
 
 		eventSelect.onchange = function() {
 			console.log(eventSelect.value);
+			clearErrors();
 			refreshRequests(eventSelect.value);
 		}
 
 		refreshButton.onclick = function() {
-			refreshRequests(eventSelect.value);
+			clearErrors();
+			if(eventSelect.value != "" && eventSelect.value != undefined) {
+				refreshRequests(eventSelect.value);
+			}
+			else {
+				createAlert("Select an event to view requests.", "red");
+			}
 		}
 
 		function refreshRequests(code) {
-			document.querySelector(".request-display").innerHTML = ""; 
-
-			if(code != "") {
+			if(code != "" && code != undefined) {
+				document.querySelector(".request-display").innerHTML = ""; 
 				getEventRequests(code, refreshRequestsCallback);
+			}
+			else {
+				document.querySelector(".request-display").innerHTML = "No requests loaded."; 
 			}
 		}
 
@@ -338,6 +351,7 @@
 		}
 
 		document.querySelector(".delete-code").onclick = function() {
+			clearErrors();
 			var deleteSelectedItem = document.querySelector(".event-delete").value;
 			if(deleteSelectedItem == "" || deleteSelectedItem == undefined) {
 				createAlert("Select a code to delete.", "red");
@@ -348,6 +362,7 @@
 		}
 
 		document.querySelector(".update-code").onclick = function() {
+			clearErrors();
 			var newCode = document.querySelector("#update-event-input").value; // This is the input field.
 			var oldCode = document.querySelector(".event-update").value; // This is the select.
 			if(newCode.trim() == "") {
