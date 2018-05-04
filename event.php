@@ -73,7 +73,7 @@
 					loadEventResults(searchField.value, code);
 				}
 			}
-			refreshToken(); //TODO
+			refreshToken(); 
 		}
 
 		function loadEventResults(query, code) {

@@ -41,10 +41,24 @@
 			<br> 
 			<li>Register Page: Simply click on the sign up link on the login page to get here.  Fill out all fields (all required) to create your account.  The notification toasts in the top right corner of the screen will let you know about any errors that may arise.</li>
 			<br>
-			<li>Request Page: Click on the "Request Song" button on the nav bar.  On this page, enter any 5 character code as your event code.  Upon completion of this, a search bar will appear.  Search any song using this input field, and the results will populate underneath.  You may request songs from the results using the Request button that will appear.</li>
+			<li>Request Page: Click on the "Request Song" button on the nav bar.  Note that this button will not appear if you are logged in, as request functionality is available for eventgoer users.  If you would like to make requests to an event, please do so before logging in, or do it in an incognito browser.  On this page, enter any 5 character code as your event code.  Upon the entry of a valid code, a search bar will appear (Note: only logged in host users can create a code from the dashboard).  Search for any song using this input field, and the results will populate underneath.  You may request songs from the results using the Request button that will appear.  This request will now show up on a host user's dashboard when the host user looks at requests from this event.</li>
 			<br>
-			<li>Manage Page (Dashboard): Login to the system and click on Manage in the nav bar.  This page will allow you to manage events and requests.  Right now, hard coded values will populate when you click on the "Refresh" buttons or if you select an item from the selects.</li>
+			<li>Manage Page (Dashboard): Login to the system and click on Manage in the nav bar.  Note that the manage tab will not appear until you have logged in.  This page will allow you to manage events and requests.  You may create an event code (must be 5 characters exactly), update the name of an event code, delete an event code, and view the requests associated with an event code on this dashboard page.</li>
 		</ul>
+		<p><em><strong>Recommended Demo Flow:</strong></em></p>
+		<ol>
+			<li>Navigate to the register page and create an account.</li>
+			<li>Login to the account you just made.</li>
+			<li>Create an event code on the manage page/dashboard.</li>
+			<li>Logout</li>
+			<li>Click on the request tab and enter the event code you just created.</li>
+			<li>Search for a song and click the request button on a few of these songs.</li>
+			<li>Login to your account again and go to the dashboard.</li>
+			<li>Under manage requests, select your event code and the requests you entered should appear.</li>
+			<li>Now, you can play around and update the event code name, delete the event code along with all associated requests, or you could delete individual requests using the 'x' button on the request rows too.</li>
+			<li>Feel free to contact me at lewt@usc.edu or lucidity@timothylew.com if you encounter any issues with demoing or grading.</li>
+		</ol>
+		<p><em>If you would like to use and play around with an already existing account, try username: "test", password: "test".</em></p>
 
 		<h3>3. Database:</h3>
 		<p>The database will store a user's id, login username, and hashed password in one table (the "users" table).  This data will come from a "host" user who registers for the service. </p>
@@ -70,6 +84,8 @@
 			<li>PHP Mail Function with HTML-Formatted Email - All API functions have an email function that notifies me if anything goes wrong (ie. error response from API call).</li>
 			<img src="img/mail.png" alt="Mail screenshot." style="width:100%; padding-top: 15px;">
 		</ul>
+
+		<h3><a href="https://303.itpwebdev.com/~lewt/assignment10/proposal.html">Final Project Proposal</a></h3>
 	
 	</div>
 </body>

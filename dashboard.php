@@ -139,7 +139,7 @@
 		var refreshButton = document.querySelector(".request-refresh");
 		var requestIdArray = [];
 
-		refreshToken(); // TODO: Is this right?
+		refreshToken(); 
 
 		function clearErrors() {
 			var errorDiv = document.querySelector(".error");
@@ -205,7 +205,7 @@
 		function refreshRequestsCallback(results) {
 			console.log(results);
 			requestIdArray = [];
-			//TODO implement logic to split into sets of 50 later...
+			
 			if(results.length > 0) {
 				var lengthAdjustment = 0;
 				for(var j = 0; j < (Math.floor((results.length/50) + 1)); j++) {
